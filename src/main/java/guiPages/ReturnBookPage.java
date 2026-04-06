@@ -35,6 +35,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
         codeField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,40 +46,52 @@ public class ReturnBookPage extends javax.swing.JFrame {
 
         jLabel2.setText("use book code to return");
 
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(codeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(codeField3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(submitBtn)
-                        .addComponent(codeField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(122, 122, 122))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(backBtn)
+                        .addGap(125, 125, 125)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(submitBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(122, 122, 122))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(codeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(codeField3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(codeField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(backBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(codeField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(codeField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(codeField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(73, 73, 73)
                 .addComponent(submitBtn)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,70 +100,79 @@ public class ReturnBookPage extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // IF NO USER LOGGED IN > ERROR MESSAGE
         if (SessionData.currentUser == null) {
-
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Login first"
-            );
+            javax.swing.JOptionPane.showMessageDialog(this, "Login first");
             return;
         }
-        
-        // CREATE AN ARRAY TO STORE THE USER WILL TYPED IN TEXT FIELDS
-        String[] codes = {
-            codeField1.getText(),
-            codeField2.getText(),
-            codeField3.getText()
-        };
-        
-        // TRACKS HOW MANY VALID BOOKS WERE RETURNED
-        int returned = 0;
-        
-        // LOOP THROUGH EACH INPUT CODE
-        for (String code : codes) {
-            // Skip empty inputs | Prevents unnecessary processing | Allows optional fields
-            if (code.isEmpty()) continue;
-            
-            // Match code with database | Loop through all books.
-            for (BookDatabase.Book b : BookDatabase.books) {
 
-                if (b.code.equalsIgnoreCase(code)) { // Case-insensitive match
-                    
-                    // Increase copies (RETURN LOGIC)
+        String[] codes = {
+            codeField1.getText().trim(),
+            codeField2.getText().trim(),
+            codeField3.getText().trim()
+        };
+
+        int returned = 0;
+        int totalEntered = 0;
+
+        for (String code : codes) {
+
+            if (code.isEmpty()) continue;
+
+            totalEntered++; // track how many user actually entered
+
+            boolean found = false;
+
+            for (BookDatabase.Book b : BookDatabase.books) {
+                if (b.code.equalsIgnoreCase(code)) {
+
                     b.copies++;
-                    
-                    // Logs the return by the user
+
                     LogsDatabase.addLog(
                             SessionData.currentUser,
                             "RETURN",
                             b.title
                     );
-                    
-                    // Count successful returns | Prevents duplicate increments
-                    returned++; // increment success count
-                    break; // stop searching once match is found
+
+                    returned++;
+                    found = true;
+                    break;
                 }
             }
-        }
-        
-        // IF NOT VALID CODES > ERROR MESSAGE
-        if (returned == 0) {
 
+            // IF ONE CODE IS INVALID
+            if (!found) {
+                javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "Some book code/s are not valid. Please make sure the book code and try again.."
+                );
+                return; // stop everything immediately
+            }
+        }
+
+        // IF NO USER INPUT > ERROR MESSAGE
+        if (totalEntered == 0) {
             javax.swing.JOptionPane.showMessageDialog(
                     this,
-                    "No valid codes"
+                    "Please enter at least one book code"
             );
             return;
         }
-        // SHOW HOW MANY BOOKS RETURNED
+
+        // IF USER SUCCEED > SUCCESS MESSAGE
         javax.swing.JOptionPane.showMessageDialog(
                 this,
                 "Returned: " + returned
         );
 
+        new HomePage().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_submitBtnActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +200,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JTextField codeField1;
     private javax.swing.JTextField codeField2;
     private javax.swing.JTextField codeField3;

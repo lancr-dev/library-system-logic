@@ -1,4 +1,5 @@
 package guiPages;
+import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
 
@@ -32,6 +33,7 @@ public class CheckoutPage extends javax.swing.JFrame {
         checkoutTable = new javax.swing.JTable();
         confirmBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,19 +55,23 @@ public class CheckoutPage extends javax.swing.JFrame {
 
         jLabel1.setText("CHECKOUT PAGE");
 
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1)
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(backBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmBtn)))
+                        .addComponent(jLabel1)
+                        .addGap(94, 94, 94)
+                        .addComponent(confirmBtn))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
@@ -74,7 +80,8 @@ public class CheckoutPage extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmBtn)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(backBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -86,54 +93,69 @@ public class CheckoutPage extends javax.swing.JFrame {
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         // IF THERE IS NO USER LOGGED IN > ERROR MESSAGE
         if (SessionData.currentUser == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Login first");
 
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Login first"
-            );
-
-            HomePage page = new HomePage();
-            page.setVisible(true);
+            new HomePage().setVisible(true);
             this.dispose();
             return;
         }
         
         // IF USER HAVE NO SELECTED BOOKS > ERROR MESSAGE
         if (SessionData.selectedBooks.isEmpty()) {
-
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "No books selected"
-            );
-
+            javax.swing.JOptionPane.showMessageDialog(this, "No books selected");
             return;
         }
         
         // STORE TO LOGS THAT THE USER HAD CHECKOUT ACTION
         String user = SessionData.currentUser;
 
-        for (String book : SessionData.selectedBooks) {
+        // 🔥 PROCESS EACH SELECTED BOOK
+        for (String code : SessionData.selectedBooks) {
 
-            LogsDatabase.addLog(
-                    user,
-                    "CHECKOUT",
-                    book
-            );
+            // Find book by code
+            for (BookDatabase.Book b : BookDatabase.books) {
+
+                if (b.code.equals(code)) {
+
+                    // ✅ CHECK STOCK (extra safety)
+                    if (b.copies <= 0) {
+                        javax.swing.JOptionPane.showMessageDialog(
+                                this,
+                                "Book out of stock: " + b.title
+                        );
+                        return;
+                    }
+
+                    // ✅ DECREASE ONLY HERE (FINAL FIX)
+                    b.copies--;
+
+                    // ✅ LOG
+                    LogsDatabase.addLog(
+                            user,
+                            "CHECKOUT",
+                            b.title
+                    );
+
+                    break;
+                }
+            }
         }
-        
-        // RESET THE SELECTED BOOKS 
-        SessionData.selectedBooks.clear();
-        
-        // IF USER SUCCESSFULLY CONFIRMED > SUCCESS MESSAGE
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Checkout Confirmed"
-        );
 
-        FormPage page = new FormPage();
-        page.setVisible(true);
+        // Clear session AFTER processing
+        SessionData.selectedBooks.clear();
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Checkout Confirmed");
+
+        new FormPage().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_confirmBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        LibraryPage page = new LibraryPage();
+        page.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,6 +183,7 @@ public class CheckoutPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JTable checkoutTable;
     private javax.swing.JButton confirmBtn;
     private javax.swing.JLabel jLabel1;
@@ -168,29 +191,34 @@ public class CheckoutPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadSelectedBooks() {
-        // Define column | table has only 1 column | Header = "Selected Books"
+        // Define columns
         String[] columns = {
-        "Selected Books"
+            "Book Title",
+            "Book Code"
         };
-        
-        // Create data array | Rows = number of selected books | Columns = 1
-        Object[][] data =
-                new Object[SessionData.selectedBooks.size()][1];
-        
-        // Fill the data
-        for (int i = 0; i < SessionData.selectedBooks.size(); i++) {
 
-            data[i][0] = SessionData.selectedBooks.get(i);
-
-        }
-        
-        // Create table model | This connects: data + columns → JTable model
+        // Use DefaultTableModel (dynamic, no manual array sizing)
         javax.swing.table.DefaultTableModel model =
-                new javax.swing.table.DefaultTableModel(
-                        data,
-                        columns
-                );
+                new javax.swing.table.DefaultTableModel(columns, 0);
 
+        // Fill rows
+        for (String code : SessionData.selectedBooks) {
+
+            String title = "Unknown";
+
+            // Find title using code
+            for (BookDatabase.Book b : BookDatabase.books) {
+                if (b.code.equals(code)) {
+                    title = b.title;
+                    break;
+                }
+            }
+
+            // Add row (Title first, then Code)
+            model.addRow(new Object[]{title, code});
+        }
+
+        // Set model to table
         checkoutTable.setModel(model);
     }
 }
