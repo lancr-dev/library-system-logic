@@ -40,6 +40,7 @@ public class LogInPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,30 +53,40 @@ public class LogInPage extends javax.swing.JFrame {
 
         jLabel3.setText("LOG IN PAGE");
 
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(loginBtn))
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(usernameField)
-                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(loginBtn))
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(usernameField)
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel3))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel3)))
+                        .addGap(24, 24, 24)
+                        .addComponent(backBtn)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(24, 24, 24)
+                .addComponent(backBtn)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
@@ -145,6 +156,13 @@ public class LogInPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        HomePage page = new HomePage();
+        page.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,6 +189,7 @@ public class LogInPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

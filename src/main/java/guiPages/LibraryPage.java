@@ -111,21 +111,13 @@ public class LibraryPage extends javax.swing.JFrame {
                 // User can only borrow max 3 books | so if they selected more than 3 > error message
                 count++;
                 if (count > 3) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Only 3 books allowed");
+                    javax.swing.JOptionPane.showMessageDialog(this, "Only up to 3 books allowed");
                     return;
                 }
 
                 // Get book code to identify the book
-                String code = model.getValueAt(i, 2).toString(); // Code column
-                String title = model.getValueAt(i, 0).toString(); // Title column
-                SessionData.selectedBooks.add(title); // Save to session data | This is how CheckoutPage knows what books were selected
-
-                // Decrease copies by matching book code
-                // How it works: Loop through all books > Find the one with matching code > Decrease its copies by 1
-                BookDatabase.books.stream()
-                        .filter(b -> b.code.equals(code))
-                        .findFirst()
-                        .ifPresent(b -> b.copies--);
+                String code = model.getValueAt(i, 2).toString();
+                SessionData.selectedBooks.add(code);
             }
         }
         
