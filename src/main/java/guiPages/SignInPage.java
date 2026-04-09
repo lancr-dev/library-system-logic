@@ -6,6 +6,7 @@
 // IMPORT NECESSARY PACKAGES
 package guiPages;
 import systemData.UserDatabase;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,117 +33,108 @@ public class SignInPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        emailField = new javax.swing.JTextField();
-        usernameField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        confirmPasswordField = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        usernameField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        confirmPasswordField = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        studentCourse = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("username");
-
-        jLabel2.setText("email");
-
-        jLabel3.setText("password");
-
-        jButton1.setText("signin");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 91, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 87, Short.MAX_VALUE)
-        );
-
-        confirmPasswordField.addActionListener(this::confirmPasswordFieldActionPerformed);
-
-        jLabel4.setText("confirm password");
-
-        jLabel5.setText("SIGN IN PAGE");
-
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
         backBtn.setText("Back");
         backBtn.addActionListener(this::backBtnActionPerformed);
+        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 21, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(107, 107, 107))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(emailField)
-                                .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(backBtn)
-                .addGap(83, 83, 83)
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(backBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addGap(4, 4, 4)
-                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(5, 5, 5)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(jButton1)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        jPanel2.setBackground(new java.awt.Color(58, 93, 46));
+        jPanel2.setForeground(new java.awt.Color(58, 93, 46));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("User Agreement & Privacy Policy.");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, -1, -1));
+
+        usernameField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jPanel2.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 250, -1));
+
+        jLabel2.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Course");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
+
+        emailField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jPanel2.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 250, -1));
+
+        passwordField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jPanel2.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 250, -1));
+
+        jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Password");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Confirm Password");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
+
+        confirmPasswordField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        confirmPasswordField.addActionListener(this::confirmPasswordFieldActionPerformed);
+        jPanel2.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 250, -1));
+
+        jButton1.setBackground(new java.awt.Color(153, 255, 102));
+        jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 51, 0));
+        jButton1.setText("REGISTER NOW!");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 250, -1));
+
+        jLabel5.setFont(new java.awt.Font("Cambria", 1, 30)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Create Account");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Username");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Fill your information below to register new account.");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("By clicking register now, you agree to CvSU's ");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
+
+        studentCourse.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        studentCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT" }));
+        jPanel2.add(studentCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 250, -1));
+
+        jLabel9.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("CvSU Email");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,53 +145,39 @@ public class SignInPage extends javax.swing.JFrame {
         String email = emailField.getText();
         String password = new String(passwordField.getPassword());
         String confirm = new String(confirmPasswordField.getPassword());
+        String course = new String(studentCourse.getSelectedItem().toString());
         
         // VALIDATIONS
         // IF USERNAME IS EMPTY OR EMAIL IS EMPTY OR PASSWORD IS EMPTY > ERROR MESSAGE
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
 
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "All fields are required!"
-            );
+            JOptionPane.showMessageDialog(this, "All fields are required!", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // IF USERNAME LENGTH IS LESS THAN 3 > ERROR MESSAGE
         if (username.length() < 3) {
 
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Username must be at least 3 characters"
-            );
+            JOptionPane.showMessageDialog(this, "Username must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         // IF PASSWORD LENGTH IS LESS THAN 3 > ERROR MESSAGE
         if (password.length() < 3) {
 
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Password must be at least 3 characters"
-            );
+            JOptionPane.showMessageDialog(this, "Password must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // IF PASSWORD IS NOT EQUAL TO CONFIRM PASSWORD > ERROR MESSAGE
         if(!password.equals(confirm)){
             
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Confirm password did not match."
-            );
+            JOptionPane.showMessageDialog(this, "Confirm password did not match.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         // IF EMAIL LENGTH IS LESS THAN 3 OR EMAIL IS NOT ENDS WITH "@gmail.com" > ERROR MESSAGE
-        if (email.length() < 3 || !email.endsWith("@gmail.com")) {
+        if (email.length() < 3 || !email.endsWith("@cvsu.edu.ph")) {
 
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Email must end with @gmail.com"
-            );
+            JOptionPane.showMessageDialog(this, "Invalid format. Email must be @cvsu.edu.ph", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
 }
         
@@ -208,26 +186,19 @@ public class SignInPage extends javax.swing.JFrame {
 
             if (u.username.equals(username)) {
 
-                javax.swing.JOptionPane.showMessageDialog(
-                        this,
-                        "Username already exists."
-                );
-
+                JOptionPane.showMessageDialog(this, "Username already exist.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
         
         // STORE THE USER username, email, and password INTO THE USER DATABASE
-        UserDatabase.addUser(username, email, password);
+        UserDatabase.addUser(username, email, password, course);
         
         // IF VALID > SUCCESS MESSAGE
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Registered successfully! Please login your account."
-        );
+        javax.swing.JOptionPane.showMessageDialog(this, "Registered Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         
-        // NAVIGATE TO HOME PAGE
-        HomePage page = new HomePage();
+        // NAVIGATE TO LOG IN PAGE
+        LogInPage page = new LogInPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -238,8 +209,6 @@ public class SignInPage extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        HomePage page = new HomePage();
-        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -278,8 +247,13 @@ public class SignInPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JComboBox<String> studentCourse;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

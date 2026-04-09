@@ -2,6 +2,7 @@ package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,81 +30,103 @@ public class ReturnBookPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         codeField1 = new javax.swing.JTextField();
-        submitBtn = new javax.swing.JButton();
-        codeField3 = new javax.swing.JTextField();
         codeField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        backBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        codeField3 = new javax.swing.JTextField();
+        codeField4 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        codeField5 = new javax.swing.JTextField();
+        submitBtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        submitBtn.setText("Submit");
-        submitBtn.addActionListener(this::submitBtnActionPerformed);
-
-        jLabel1.setText("RETURN BOOK PAGE");
-
-        jLabel2.setText("use book code to return");
-
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
         backBtn.setText("Back");
         backBtn.addActionListener(this::backBtnActionPerformed);
+        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 14, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(backBtn)
-                        .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(submitBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(122, 122, 122))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(codeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(codeField3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(codeField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))))
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(backBtn))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(codeField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(codeField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(codeField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(submitBtn)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(58, 93, 46));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Thank you for borrowing! @CvSU Library!");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
+
+        codeField1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jPanel1.add(codeField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 200, -1));
+        jPanel1.add(codeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 200, -1));
+
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 31)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Return a Book");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("4.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Enter the book code to return the book.");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("1.");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("2.");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        jPanel1.add(codeField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 200, -1));
+        jPanel1.add(codeField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 200, -1));
+
+        jLabel7.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("3.");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("5.");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
+        jPanel1.add(codeField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 200, -1));
+
+        submitBtn.setBackground(new java.awt.Color(153, 255, 102));
+        submitBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(0, 51, 0));
+        submitBtn.setText("SUBMIT");
+        submitBtn.addActionListener(this::submitBtnActionPerformed);
+        jPanel1.add(submitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 260, -1));
+
+        jLabel9.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("This will process book return.");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        // IF NO USER LOGGED IN > ERROR MESSAGE
-        if (SessionData.currentUser == null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Login first");
-            return;
-        }
-
+        
         String[] codes = {
             codeField1.getText().trim(),
             codeField2.getText().trim(),
@@ -140,28 +163,19 @@ public class ReturnBookPage extends javax.swing.JFrame {
 
             // IF ONE CODE IS INVALID
             if (!found) {
-                javax.swing.JOptionPane.showMessageDialog(
-                        this,
-                        "Some book code/s are not valid. Please make sure the book code and try again.."
-                );
+                JOptionPane.showMessageDialog(this, "Some book code/s are not valid. Please make sure the book code and try again.", "Returning Book Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return; // stop everything immediately
             }
         }
 
         // IF NO USER INPUT > ERROR MESSAGE
         if (totalEntered == 0) {
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter at least one book code"
-            );
+            JOptionPane.showMessageDialog(this, "Please enter at least one book code.", "Returning Book Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // IF USER SUCCEED > SUCCESS MESSAGE
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Returned: " + returned
-        );
+        javax.swing.JOptionPane.showMessageDialog(this, "Returned: " + returned, "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         new HomePage().setVisible(true);
         this.dispose();
@@ -204,8 +218,18 @@ public class ReturnBookPage extends javax.swing.JFrame {
     private javax.swing.JTextField codeField1;
     private javax.swing.JTextField codeField2;
     private javax.swing.JTextField codeField3;
+    private javax.swing.JTextField codeField4;
+    private javax.swing.JTextField codeField5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }
