@@ -15,12 +15,14 @@ public class UserDatabase {
         public String username;
         public String email;
         public String password;
+        public String course;
         
         // THIS CODE RUNS WHEN CREATING A NEW USER
-        public User(String u, String e, String p) {
+        public User(String u, String e, String p, String c) {
             username = u;
             email = e;
             password = p;
+            course = c;
         }
     }
     
@@ -29,8 +31,8 @@ public class UserDatabase {
 
 
     // ADD USER
-    public static void addUser(String u, String e, String p) {
-        users.add(new User(u, e, p));
+    public static void addUser(String u, String e, String p, String c) {
+        users.add(new User(u, e, p, c));
     }
 
 
@@ -54,9 +56,10 @@ public class UserDatabase {
 
         users.add(
             new User(
-                "admin",
-                "admin@gmail.com",
-                "1234"
+                "Admin",
+                "--",
+                "1234",
+                "--"
             )
         );
 

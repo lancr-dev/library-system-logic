@@ -30,13 +30,60 @@ public class LogsPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        backBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        registeredStudentsBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         logsTable = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(58, 93, 46));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel1.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Library Logs");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+
+        registeredStudentsBtn.setBackground(new java.awt.Color(153, 255, 102));
+        registeredStudentsBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        registeredStudentsBtn.setForeground(new java.awt.Color(0, 51, 0));
+        registeredStudentsBtn.setText("List of Registered Users");
+        registeredStudentsBtn.addActionListener(this::registeredStudentsBtnActionPerformed);
+        jPanel1.add(registeredStudentsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 120, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 40)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel1.setText("CvSU");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, 60));
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel4.setText("Management");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Cambria", 1, 100)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel3.setText("LIBRARY");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
+
+        logsTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 0)));
+        logsTable.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        logsTable.setForeground(new java.awt.Color(0, 51, 0));
         logsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -48,38 +95,14 @@ public class LogsPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        logsTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
         jScrollPane1.setViewportView(logsTable);
 
-        jLabel1.setText("LOGS PAGE");
+        jScrollPane2.setViewportView(jScrollPane1);
 
-        backBtn.setText("Back");
-        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 1220, 550));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backBtn)
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel1)))
-                .addContainerGap(138, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(backBtn))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -90,6 +113,13 @@ public class LogsPage extends javax.swing.JFrame {
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void registeredStudentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registeredStudentsBtnActionPerformed
+        // TODO add your handling code here:
+        RegisteredPage page = new RegisteredPage();
+        page.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_registeredStudentsBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,8 +149,14 @@ public class LogsPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable logsTable;
+    private javax.swing.JButton registeredStudentsBtn;
     // End of variables declaration//GEN-END:variables
 
     private void loadLogs() {

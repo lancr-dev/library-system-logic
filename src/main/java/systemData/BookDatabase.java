@@ -34,16 +34,16 @@ public class BookDatabase {
         if (!books.isEmpty()) return; 
         
         // BOOKS COLLECTION
-        books.add(new Book("Java Basics", "John", "B1", 3));
-        books.add(new Book("DSA", "Mike", "B2", 3));
-        books.add(new Book("Algorithms", "Sara", "B3", 3));
-        books.add(new Book("Database", "Kim", "B4", 3));
-        books.add(new Book("Networking", "Lee", "B5", 3));
-        books.add(new Book("Operating System", "Ken", "B6", 3));
-        books.add(new Book("AI Intro", "Anna", "B7", 3));
-        books.add(new Book("Web Dev", "Paul", "B8", 3));
-        books.add(new Book("Security", "Mark", "B9", 3));
-        books.add(new Book("Software Eng", "Tom", "B10", 3));
+        books.add(new Book("Java Basics", "Lance", "B1", 10));
+        books.add(new Book("DSA", "Miguel", "B2", 10));
+        books.add(new Book("Algorithms", "Sevi", "B3", 10));
+        books.add(new Book("Database", "Rhowanne", "B4", 10));
+        books.add(new Book("Networking", "Charles", "B5", 10));
+        books.add(new Book("Operating System", "Aldrin", "B6", 10));
+        books.add(new Book("AI Intro", "Jayson", "B7", 10));
+        books.add(new Book("Web Dev", "Paul", "B8", 10));
+        books.add(new Book("Security", "Mark", "B9", 10));
+        books.add(new Book("Software Eng", "John", "B10", 10));
 
     }
 

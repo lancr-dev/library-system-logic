@@ -2,6 +2,7 @@
 package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
+import javax.swing.JOptionPane;
 
 public class LibraryPage extends javax.swing.JFrame {
     
@@ -24,14 +25,60 @@ public class LibraryPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        checkoutBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         bookTable = new javax.swing.JTable();
-        checkoutBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(58, 93, 46));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 50)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel1.setText("CvSU");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, 60));
+
+        jLabel3.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Our Collection");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Cambria", 1, 120)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel2.setText("LIBRARY");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, -1, -1));
+
+        back.setBackground(new java.awt.Color(153, 255, 102));
+        back.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        back.setForeground(new java.awt.Color(0, 51, 0));
+        back.setText("Back");
+        back.addActionListener(this::backActionPerformed);
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 40)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel4.setText("Management");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
+
+        checkoutBtn.setBackground(new java.awt.Color(153, 255, 102));
+        checkoutBtn.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        checkoutBtn.setForeground(new java.awt.Color(0, 51, 0));
+        checkoutBtn.setText("Checkout");
+        checkoutBtn.addActionListener(this::checkoutBtnActionPerformed);
+        jPanel1.add(checkoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 190, -1, -1));
+
+        bookTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 0)));
+        bookTable.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        bookTable.setForeground(new java.awt.Color(0, 51, 0));
         bookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -43,47 +90,15 @@ public class LibraryPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        bookTable.setGridColor(new java.awt.Color(255, 255, 255));
+        bookTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
         jScrollPane1.setViewportView(bookTable);
 
-        checkoutBtn.setText("Checkout");
-        checkoutBtn.addActionListener(this::checkoutBtnActionPerformed);
+        jScrollPane2.setViewportView(jScrollPane1);
 
-        jLabel1.setText("DASHBOARD/LIBRARY PAGE");
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 1260, 490));
 
-        back.setText("<-- Back");
-        back.addActionListener(this::backActionPerformed);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(back)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(checkoutBtn))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkoutBtn)
-                    .addComponent(back))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -104,14 +119,14 @@ public class LibraryPage extends javax.swing.JFrame {
                 // Prevent selecting out-of-stock
                 Object copiesObj = model.getValueAt(i, 3);
                 if (copiesObj.toString().equals("OUT OF STOCK")) { // Extra safety check
-                    javax.swing.JOptionPane.showMessageDialog(this, "Book out of stock");
+                    JOptionPane.showMessageDialog(this, "Book out of stock.", "No book was found", javax.swing.JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 
                 // User can only borrow max 3 books | so if they selected more than 3 > error message
                 count++;
                 if (count > 3) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Only up to 3 books allowed");
+                    JOptionPane.showMessageDialog(this, "Only up to 3 books allowed at a time.", "Limitation", javax.swing.JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -123,7 +138,7 @@ public class LibraryPage extends javax.swing.JFrame {
         
         // If nothing selected > Prevent empty checkout
         if (count == 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select at least 1 book");
+            JOptionPane.showMessageDialog(this, "No book/s selected. Select at least 1.", "No book was found", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -135,7 +150,6 @@ public class LibraryPage extends javax.swing.JFrame {
         // Navigate to CheckoutPage
         CheckoutPage page = new CheckoutPage();
         page.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_checkoutBtnActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -175,7 +189,12 @@ public class LibraryPage extends javax.swing.JFrame {
     private javax.swing.JTable bookTable;
     private javax.swing.JButton checkoutBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     private void loadTable() {

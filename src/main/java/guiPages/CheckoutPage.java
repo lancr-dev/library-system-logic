@@ -2,6 +2,7 @@ package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,7 @@ public class CheckoutPage extends javax.swing.JFrame {
         initComponents();
         loadSelectedBooks();
         setLocationRelativeTo(null);
+        checkoutTable.setEnabled(false);
     }
 
     /**
@@ -37,6 +39,9 @@ public class CheckoutPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        checkoutTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 0)));
+        checkoutTable.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        checkoutTable.setForeground(new java.awt.Color(0, 51, 0));
         checkoutTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -48,13 +53,21 @@ public class CheckoutPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        checkoutTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
         jScrollPane1.setViewportView(checkoutTable);
 
+        confirmBtn.setBackground(new java.awt.Color(153, 255, 102));
+        confirmBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        confirmBtn.setForeground(new java.awt.Color(0, 51, 0));
         confirmBtn.setText("Confirm");
         confirmBtn.addActionListener(this::confirmBtnActionPerformed);
 
-        jLabel1.setText("CHECKOUT PAGE");
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel1.setText("List of Selected Books");
 
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
         backBtn.setText("Back");
         backBtn.addActionListener(this::backBtnActionPerformed);
 
@@ -63,53 +76,39 @@ public class CheckoutPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(94, 94, 94)
-                        .addComponent(confirmBtn))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backBtn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(confirmBtn))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmBtn)
-                    .addComponent(jLabel1)
-                    .addComponent(backBtn))
+                .addComponent(backBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        // IF THERE IS NO USER LOGGED IN > ERROR MESSAGE
-        if (SessionData.currentUser == null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Login first");
-
-            new HomePage().setVisible(true);
-            this.dispose();
-            return;
-        }
-        
-        // IF USER HAVE NO SELECTED BOOKS > ERROR MESSAGE
-        if (SessionData.selectedBooks.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "No books selected");
-            return;
-        }
-        
         // STORE TO LOGS THAT THE USER HAD CHECKOUT ACTION
         String user = SessionData.currentUser;
 
-        // 🔥 PROCESS EACH SELECTED BOOK
+        // PROCESS EACH SELECTED BOOK
         for (String code : SessionData.selectedBooks) {
 
             // Find book by code
@@ -117,7 +116,7 @@ public class CheckoutPage extends javax.swing.JFrame {
 
                 if (b.code.equals(code)) {
 
-                    // ✅ CHECK STOCK (extra safety)
+                    // CHECK STOCK (extra safety)
                     if (b.copies <= 0) {
                         javax.swing.JOptionPane.showMessageDialog(
                                 this,
@@ -126,10 +125,10 @@ public class CheckoutPage extends javax.swing.JFrame {
                         return;
                     }
 
-                    // ✅ DECREASE ONLY HERE (FINAL FIX)
+                    // DECREASE ONLY HERE (FINAL FIX)
                     b.copies--;
 
-                    // ✅ LOG
+                    // LOG
                     LogsDatabase.addLog(
                             user,
                             "CHECKOUT",
@@ -144,7 +143,7 @@ public class CheckoutPage extends javax.swing.JFrame {
         // Clear session AFTER processing
         SessionData.selectedBooks.clear();
 
-        javax.swing.JOptionPane.showMessageDialog(this, "Checkout Confirmed");
+        JOptionPane.showMessageDialog(this, "Checkout Confirmed.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         new FormPage().setVisible(true);
         this.dispose();
