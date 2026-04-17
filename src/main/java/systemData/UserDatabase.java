@@ -16,13 +16,15 @@ public class UserDatabase {
         public String email;
         public String password;
         public String course;
+        public int studentId;
         
         // THIS CODE RUNS WHEN CREATING A NEW USER
-        public User(String u, String e, String p, String c) {
+        public User(String u, String e, String p, String c, int id) {
             username = u;
             email = e;
             password = p;
             course = c;
+            studentId = id;
         }
     }
     
@@ -31,8 +33,8 @@ public class UserDatabase {
 
 
     // ADD USER
-    public static void addUser(String u, String e, String p, String c) {
-        users.add(new User(u, e, p, c));
+    public static void addUser(String u, String e, String p, String c, int id) {
+        users.add(new User(u, e, p, c, id));
     }
 
 
@@ -54,14 +56,8 @@ public class UserDatabase {
 
         if (!users.isEmpty()) return;
 
-        users.add(
-            new User(
-                "Admin",
-                "--",
-                "1234",
-                "--"
-            )
-        );
+        users.add(new User("Admin", "--", "1234", "--", 00000000));
+        users.add(new User("Student", "student@cvsu.edu.ph", "1234", "BSCS", 123456789));
 
     }
 }

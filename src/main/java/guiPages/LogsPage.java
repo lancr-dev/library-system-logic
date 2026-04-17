@@ -60,11 +60,11 @@ public class LogsPage extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         registeredStudentsBtn.setBackground(new java.awt.Color(153, 255, 102));
-        registeredStudentsBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        registeredStudentsBtn.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         registeredStudentsBtn.setForeground(new java.awt.Color(0, 51, 0));
         registeredStudentsBtn.setText("List of Registered Users");
         registeredStudentsBtn.addActionListener(this::registeredStudentsBtnActionPerformed);
-        jPanel1.add(registeredStudentsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 120, -1, -1));
+        jPanel1.add(registeredStudentsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 120, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 255, 204));
@@ -118,7 +118,6 @@ public class LogsPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegisteredPage page = new RegisteredPage();
         page.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_registeredStudentsBtnActionPerformed
 
     /**

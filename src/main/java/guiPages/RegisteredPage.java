@@ -102,8 +102,6 @@ public class RegisteredPage extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        LogsPage page = new LogsPage();
-        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -149,14 +147,15 @@ public class RegisteredPage extends javax.swing.JFrame {
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel();
 
         // Set column names (NO password)
-        model.setColumnIdentifiers(new String[]{"Username", "Email", "Course"});
+        model.setColumnIdentifiers(new String[]{"Username", "Email", "Course", "Student ID"});
 
         // Loop through users and add to table
         for (UserDatabase.User user : UserDatabase.users) {
             model.addRow(new Object[]{
                 user.username,
                 user.email,
-                user.course
+                user.course,
+                user.studentId
             });
         }
 

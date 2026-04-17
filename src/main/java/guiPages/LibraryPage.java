@@ -154,8 +154,6 @@ public class LibraryPage extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        HomePage page = new HomePage();
-        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
