@@ -34,7 +34,7 @@ public class FormPage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        agreeCheckBox = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         courseField = new javax.swing.JComboBox<>();
@@ -94,10 +94,10 @@ public class FormPage extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("- Handle books with care. Avoid scratches, folds, or damage.");
 
-        jCheckBox1.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("I Agree to the Library Rules and Conditions.");
-        jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
+        agreeCheckBox.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        agreeCheckBox.setForeground(new java.awt.Color(255, 255, 255));
+        agreeCheckBox.setText("I Agree to the Library Rules and Conditions.");
+        agreeCheckBox.addActionListener(this::agreeCheckBoxActionPerformed);
 
         jLabel11.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,6 +109,7 @@ public class FormPage extends javax.swing.JFrame {
 
         courseField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         courseField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT" }));
+        courseField.addActionListener(this::courseFieldActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,17 +144,16 @@ public class FormPage extends javax.swing.JFrame {
                                     .addComponent(courseField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jLabel7)))
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel11)
-                    .addComponent(jCheckBox1))
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel11)
+                            .addComponent(agreeCheckBox))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -192,7 +192,7 @@ public class FormPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(agreeCheckBox)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -235,8 +235,13 @@ public class FormPage extends javax.swing.JFrame {
         // CREATE VARIABLE INT ID
         int id;
         
-        if(idText.length() != 9){
+        if(idText.length() != 9 || idText.length() > 9){
             JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(courseField.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Please select your course.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -248,6 +253,11 @@ public class FormPage extends javax.swing.JFrame {
         } catch (Exception e) {
             // IF USER DO NOT TYPE INTEGER IN STUDENT ID > ERROR MESSAGE
             JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(!agreeCheckBox.isSelected()){
+            JOptionPane.showMessageDialog(this, "You must agree to the Library \nRules and Conditions. ", "Terms and Conditions.", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
@@ -274,9 +284,13 @@ public class FormPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_submitBtnActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void agreeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agreeCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_agreeCheckBoxActionPerformed
+
+    private void courseFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_courseFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,10 +318,10 @@ public class FormPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox agreeCheckBox;
     private javax.swing.JComboBox<String> courseField;
     private javax.swing.JTextField dateField;
     private javax.swing.JTextField idField;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

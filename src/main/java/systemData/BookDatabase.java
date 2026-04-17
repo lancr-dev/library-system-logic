@@ -6,6 +6,47 @@ import java.util.ArrayList;
 // CREATE BOOK DATABASE
 public class BookDatabase {
 
+    public static boolean removeCopies(String code, int quantity) {
+        for (Book book : books) {
+
+        if (book.code.equalsIgnoreCase(code)) {
+
+            // Check if enough copies exist
+            if (quantity <= 0) return false;
+
+            if (book.copies >= quantity) {
+                book.copies -= quantity;
+                return true;
+            } else {
+                return false; // Not enough copies
+            }
+        }
+    }
+
+    return false; // Book not found
+    }
+
+    public static boolean addBook(String title, String author, String code, int copies) {
+        // Basic validation
+        if (title == null || title.isEmpty() ||
+            author == null || author.isEmpty() ||
+            code == null || code.isEmpty() ||
+            copies <= 0) {
+            return false;
+        }
+
+        // Prevent duplicate book codes
+        for (Book book : books) {
+            if (book.code.equalsIgnoreCase(code)) {
+                return false;
+            }
+        }
+
+        // Add new book
+        books.add(new Book(title, author, code, copies));
+        return true;
+    }
+
     public static class Book {
         // CREATE MODEL / VARIABLES FOR title, author, code, copies
         public String title;

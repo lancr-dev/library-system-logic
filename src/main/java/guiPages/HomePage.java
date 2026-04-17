@@ -36,23 +36,23 @@ public class HomePage extends javax.swing.JFrame {
         signBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        lib = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        goLibraryBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         logsBtn = new javax.swing.JButton();
-        returnBook = new javax.swing.JButton();
+        returnBookBtn = new javax.swing.JButton();
         welcomeLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        manageBooksBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 368, 151, -1));
 
@@ -88,46 +88,46 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 0));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 10, 150));
-
-        jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Copyright © CvSU Library System");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("cvsulibrary@cvsu.edu.ph");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Cavite, Civic Center, Palico IV, Imus City, Cavite, 4103");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Tel: (046) 471-6607");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Library System Management");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Cavite, Civic Center, Palico IV, Imus City, Cavite, 4103");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Tel: (046) 471-6607");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("cvsulibrary@cvsu.edu.ph");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, -1, -1));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, 140));
 
         jLabel12.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Cavite State University - Imus Campus");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 60, -1, -1));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 50, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 1370, 180));
+        jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Copyright © CvSU Library System");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
 
-        lib.setBackground(new java.awt.Color(204, 255, 204));
-        lib.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
-        lib.setForeground(new java.awt.Color(0, 51, 0));
-        lib.setText("Go Library!");
-        lib.addActionListener(this::libActionPerformed);
-        jPanel1.add(lib, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1370, 160));
+
+        goLibraryBtn.setBackground(new java.awt.Color(153, 255, 102));
+        goLibraryBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        goLibraryBtn.setForeground(new java.awt.Color(0, 51, 0));
+        goLibraryBtn.setText("Go Library!");
+        goLibraryBtn.addActionListener(this::goLibraryBtnActionPerformed);
+        jPanel1.add(goLibraryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, -1));
 
         logoutBtn.setBackground(new java.awt.Color(153, 255, 102));
         logoutBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -141,14 +141,14 @@ public class HomePage extends javax.swing.JFrame {
         logsBtn.setForeground(new java.awt.Color(0, 51, 0));
         logsBtn.setText("Logs");
         logsBtn.addActionListener(this::logsBtnActionPerformed);
-        jPanel1.add(logsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+        jPanel1.add(logsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 30, -1, -1));
 
-        returnBook.setBackground(new java.awt.Color(204, 255, 204));
-        returnBook.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
-        returnBook.setForeground(new java.awt.Color(0, 51, 0));
-        returnBook.setText("Return Book");
-        returnBook.addActionListener(this::returnBookActionPerformed);
-        jPanel1.add(returnBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, -1, -1));
+        returnBookBtn.setBackground(new java.awt.Color(204, 255, 204));
+        returnBookBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        returnBookBtn.setForeground(new java.awt.Color(0, 51, 0));
+        returnBookBtn.setText("Return Book");
+        returnBookBtn.addActionListener(this::returnBookBtnActionPerformed);
+        jPanel1.add(returnBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, -1, -1));
 
         welcomeLabel.setBackground(new java.awt.Color(153, 255, 102));
         welcomeLabel.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -166,16 +166,23 @@ public class HomePage extends javax.swing.JFrame {
         jLabel7.setText("CvSU Library System");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
+        manageBooksBtn.setBackground(new java.awt.Color(204, 255, 204));
+        manageBooksBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        manageBooksBtn.setForeground(new java.awt.Color(0, 51, 0));
+        manageBooksBtn.setText("Book Management");
+        manageBooksBtn.addActionListener(this::manageBooksBtnActionPerformed);
+        jPanel1.add(manageBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void returnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookActionPerformed
+    private void returnBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookBtnActionPerformed
         // IF USER IS NOT LOGGED IN, CANNOT RETURN BOOK > ERROR MESSAGE
         if (SessionData.currentUser == null) {
 
-            JOptionPane.showMessageDialog(null, "You must login first.", "No account was found.", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You must login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
             
             // NAVIGATE TO HOME PAGE AGAIN
             LogInPage page = new LogInPage();
@@ -184,10 +191,9 @@ public class HomePage extends javax.swing.JFrame {
             // IF USER IS LOGGED IN > NAVIGATE TO RETURN BOOK PAGE
             ReturnBookPage page = new ReturnBookPage();
             page.setVisible(true);
-            this.dispose();
         }
 
-    }//GEN-LAST:event_returnBookActionPerformed
+    }//GEN-LAST:event_returnBookBtnActionPerformed
 
     private void logsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsBtnActionPerformed
         // IF USER CLICKED LOGS BUTTON > NAVIGATE TO LOGS PAGE
@@ -212,11 +218,11 @@ public class HomePage extends javax.swing.JFrame {
         javax.swing.JOptionPane.showMessageDialog(this, "Logged out sucessfully.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void libActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libActionPerformed
+    private void goLibraryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goLibraryBtnActionPerformed
         // IF USER IS NOT LOGGED IN, CANNOT GO TO LIBRARY PAGE > ERROR MESSAGE
         if (SessionData.currentUser == null) {
 
-            JOptionPane.showMessageDialog(null, "You must login first.", "No account was found.", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You must login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
 
             // NAVIGATE TO HOME PAGE AGAIN
             LogInPage page = new LogInPage();
@@ -228,7 +234,7 @@ public class HomePage extends javax.swing.JFrame {
         LibraryPage page = new LibraryPage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_libActionPerformed
+    }//GEN-LAST:event_goLibraryBtnActionPerformed
 
     private void signBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signBtnActionPerformed
         // IF USER CLICKED SIGN IN BUTTON > NAVIGATE TO SIGN IN PAGE
@@ -241,6 +247,12 @@ public class HomePage extends javax.swing.JFrame {
         LogInPage page = new LogInPage();
         page.setVisible(true);
     }//GEN-LAST:event_logBtnActionPerformed
+
+    private void manageBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageBooksBtnActionPerformed
+        // TODO add your handling code here:
+        BookManagementPage page = new BookManagementPage();
+        page.setVisible(true);
+    }//GEN-LAST:event_manageBooksBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,6 +280,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton goLibraryBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -282,11 +295,11 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton lib;
     private javax.swing.JButton logBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton logsBtn;
-    private javax.swing.JButton returnBook;
+    private javax.swing.JButton manageBooksBtn;
+    private javax.swing.JButton returnBookBtn;
     private javax.swing.JButton signBtn;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
@@ -298,6 +311,7 @@ public class HomePage extends javax.swing.JFrame {
 
             logoutBtn.setVisible(false);
             logsBtn.setVisible(false);
+            manageBooksBtn.setVisible(false);
 
             signBtn.setVisible(true);
             logBtn.setVisible(true);
@@ -323,10 +337,14 @@ public class HomePage extends javax.swing.JFrame {
             if (SessionData.currentUser.equals("Admin")) {
 
                 logsBtn.setVisible(true);
+                manageBooksBtn.setVisible(true);
+                returnBookBtn.setVisible(false);
+                goLibraryBtn.setVisible(false);        
 
             } else {
 
                 logsBtn.setVisible(false);
+                manageBooksBtn.setVisible(false);
             }
         }
     }
