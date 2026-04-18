@@ -68,7 +68,7 @@ public class FormPage extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("User Details");
+        jLabel1.setText("Student Details");
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,9 +121,6 @@ public class FormPage extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -143,9 +140,6 @@ public class FormPage extends javax.swing.JFrame {
                                     .addComponent(idField, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                                     .addComponent(courseField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -153,8 +147,13 @@ public class FormPage extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addComponent(jLabel11)
-                            .addComponent(agreeCheckBox))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(agreeCheckBox)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel7))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,8 +202,8 @@ public class FormPage extends javax.swing.JFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // CREATE VARIABLES TO GET DATA, STUDENT ID, AND COURSE FROM THE TEXT FIELDS
-        String date = dateField.getText();
-        String idText = idField.getText();
+        String date = dateField.getText().trim();
+        String idText = idField.getText().trim();
         String course = courseField.getSelectedItem().toString();
         
         // VALIDATIONS
@@ -214,7 +213,7 @@ public class FormPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "All fields are required!", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // IF USER TYPED DATA THAT IS NOT MATCHES TO GIVEN FORMAT > ERROR MESSAGE
+        // IF USER TYPED DATA THAT IS NOT MATCHES TO GIVEN FORMAT > ERROR MESSAGE || THIS IS A REGEX METHOD
         if (!date.matches("\\d+/\\d+/\\d+")) {
 
             JOptionPane.showMessageDialog(this, "Date Format: MM/DD/YYYY", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);

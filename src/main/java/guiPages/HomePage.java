@@ -51,6 +51,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         manageBooksBtn = new javax.swing.JButton();
+        borrowedBooksBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,6 +174,13 @@ public class HomePage extends javax.swing.JFrame {
         manageBooksBtn.addActionListener(this::manageBooksBtnActionPerformed);
         jPanel1.add(manageBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
 
+        borrowedBooksBtn.setBackground(new java.awt.Color(204, 255, 204));
+        borrowedBooksBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        borrowedBooksBtn.setForeground(new java.awt.Color(0, 51, 0));
+        borrowedBooksBtn.setText("Borrowed Books");
+        borrowedBooksBtn.addActionListener(this::borrowedBooksBtnActionPerformed);
+        jPanel1.add(borrowedBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
@@ -203,6 +211,16 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_logsBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        int result = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Do you really want to logout?",
+            "Logout Confirmation",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (result == javax.swing.JOptionPane.YES_OPTION) {
+            // perform the action
+        }
         // IF USER LOGOUT > CREATE LOG
         LogsDatabase.addLog(
             SessionData.currentUser,
@@ -254,6 +272,12 @@ public class HomePage extends javax.swing.JFrame {
         page.setVisible(true);
     }//GEN-LAST:event_manageBooksBtnActionPerformed
 
+    private void borrowedBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowedBooksBtnActionPerformed
+        // TODO add your handling code here:
+        UserBorrowedBooksPage page = new UserBorrowedBooksPage();
+        page.setVisible(true);
+    }//GEN-LAST:event_borrowedBooksBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,6 +304,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton borrowedBooksBtn;
     private javax.swing.JButton goLibraryBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -315,6 +340,10 @@ public class HomePage extends javax.swing.JFrame {
 
             signBtn.setVisible(true);
             logBtn.setVisible(true);
+            
+            borrowedBooksBtn.setVisible(false);
+            returnBookBtn.setVisible(true);
+            goLibraryBtn.setVisible(true);
 
             welcomeLabel.setVisible(false);
         // ELSE IF USER LOGGED IN > SHOW LOGOUT BTN, HIDE LOG IN AND SIGN IN BTN, SHOW WELCOME LABEL
@@ -339,7 +368,8 @@ public class HomePage extends javax.swing.JFrame {
                 logsBtn.setVisible(true);
                 manageBooksBtn.setVisible(true);
                 returnBookBtn.setVisible(false);
-                goLibraryBtn.setVisible(false);        
+                goLibraryBtn.setVisible(false); 
+                borrowedBooksBtn.setVisible(false);
 
             } else {
 

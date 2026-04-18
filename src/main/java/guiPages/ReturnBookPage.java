@@ -3,6 +3,7 @@ import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
 import javax.swing.JOptionPane;
+import systemData.UserBorrowedBooks;
 
 /**
  *
@@ -126,7 +127,16 @@ public class ReturnBookPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        
+        int result = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to return the selected books?",
+            "Return Book Confirmation",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (result == javax.swing.JOptionPane.YES_OPTION) {
+            // perform the action
+        }
         String[] codes = {
             codeField1.getText().trim(),
             codeField2.getText().trim(),
@@ -144,6 +154,30 @@ public class ReturnBookPage extends javax.swing.JFrame {
 
             boolean found = false;
 
+            // STEP 1: Check if user actually borrowed this book
+            UserBorrowedBooks recordToRemove = null;
+
+            for (UserBorrowedBooks record : SessionData.borrowedBooks) {
+                if (record.username.equals(SessionData.currentUser)
+                        && record.code.equalsIgnoreCase(code)) {
+
+                    recordToRemove = record;
+                    break;
+                }
+            }
+
+            // IF NOT BORROWED BY USER → ERROR
+            if (recordToRemove == null) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "You can only return books that you have borrowed.",
+                        "Returning Book Failed",
+                        javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // STEP 2: Find the book in database and update copies
             for (BookDatabase.Book b : BookDatabase.books) {
                 if (b.code.equalsIgnoreCase(code)) {
 
@@ -160,6 +194,9 @@ public class ReturnBookPage extends javax.swing.JFrame {
                     break;
                 }
             }
+
+            // STEP 3: Remove from borrowed records
+            SessionData.borrowedBooks.remove(recordToRemove);
 
             // IF ONE CODE IS INVALID
             if (!found) {
