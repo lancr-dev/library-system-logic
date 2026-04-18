@@ -3,6 +3,7 @@ import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
 import javax.swing.JOptionPane;
+import systemData.UserBorrowedBooks;
 
 /**
  *
@@ -38,6 +39,7 @@ public class CheckoutPage extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -90,21 +92,32 @@ public class CheckoutPage extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Selected Books");
 
+        jLabel7.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("@Cvsu Library Management System");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(294, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(257, 257, 257))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(257, 257, 257))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel6)
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 414, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 510));
@@ -133,6 +146,16 @@ public class CheckoutPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
+        int result = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Confirm selected books?",
+            "Checkout Confirmation",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (result == javax.swing.JOptionPane.YES_OPTION) {
+            // perform the action
+        }
         // STORE TO LOGS THAT THE USER HAD CHECKOUT ACTION
         String user = SessionData.currentUser;
 
@@ -155,6 +178,15 @@ public class CheckoutPage extends javax.swing.JFrame {
 
                     // DECREASE ONLY HERE (FINAL FIX)
                     b.copies--;
+
+                    // SAVE BORROW RECORD (NEW - SAFE ADDITION)
+                    SessionData.borrowedBooks.add(
+                            new UserBorrowedBooks(
+                                    user,
+                                    b.title,
+                                    b.code
+                            )
+                    );
 
                     // LOG
                     LogsDatabase.addLog(
@@ -217,6 +249,7 @@ public class CheckoutPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

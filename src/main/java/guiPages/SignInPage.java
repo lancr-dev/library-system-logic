@@ -110,7 +110,7 @@ public class SignInPage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 30)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Create Account");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +120,7 @@ public class SignInPage extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Fill your information below to register new account.");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,12 +151,12 @@ public class SignInPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // CREATE VARIABLE TO GET THE USERNAME, EMAIL, AND PASSWORD FROM THE TEXTFIELDS
-        String username = usernameField.getText();
-        String email = emailField.getText();
+        String username = usernameField.getText().trim();
+        String email = emailField.getText().trim();
         String password = new String(passwordField.getPassword());
         String confirm = new String(confirmPasswordField.getPassword());
         String course = new String(studentCourse.getSelectedItem().toString());
-        String studentIdText = studentIdField.getText();
+        String studentIdText = studentIdField.getText().trim();
         
         // VALIDATIONS
         // IF USERNAME IS EMPTY OR EMAIL IS EMPTY OR PASSWORD IS EMPTY > ERROR MESSAGE
@@ -168,14 +168,19 @@ public class SignInPage extends javax.swing.JFrame {
         int studentId = Integer.parseInt(studentIdText);
         
         // IF USERNAME LENGTH IS LESS THAN 3 > ERROR MESSAGE
-        if (username.length() < 3) {
+        if (username.length() < 3 || username.length() > 20) {
 
-            JOptionPane.showMessageDialog(this, "Username must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username must be 3–20 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(!username.matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Username must contain letters only.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // IF EMAIL LENGTH IS LESS THAN 3 OR EMAIL IS NOT ENDS WITH "@gmail.com" > ERROR MESSAGE
-        if (email.length() < 3 || !email.endsWith("@cvsu.edu.ph")) {
+        if (email.length() < 3 || email.length() > 32 || !email.endsWith("@cvsu.edu.ph")) {
 
             JOptionPane.showMessageDialog(this, "Invalid format. Email must be @cvsu.edu.ph", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
@@ -192,7 +197,7 @@ public class SignInPage extends javax.swing.JFrame {
         }
         
         // IF PASSWORD LENGTH IS LESS THAN 3 > ERROR MESSAGE
-        if (password.length() < 3) {
+        if (password.length() < 3 || password.length() > 20) {
 
             JOptionPane.showMessageDialog(this, "Password must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
