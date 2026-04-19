@@ -63,6 +63,7 @@ public class CheckoutPage extends javax.swing.JFrame {
             }
         ));
         checkoutTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
+        checkoutTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(checkoutTable);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 127, 692, 343));
@@ -146,71 +147,72 @@ public class CheckoutPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        int result = javax.swing.JOptionPane.showConfirmDialog(
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
             this,
             "Confirm selected books?",
             "Checkout Confirmation",
             javax.swing.JOptionPane.YES_NO_OPTION
         );
 
-        if (result == javax.swing.JOptionPane.YES_OPTION) {
-            // perform the action
-        }
-        // STORE TO LOGS THAT THE USER HAD CHECKOUT ACTION
-        String user = SessionData.currentUser;
+        if (userChoice == javax.swing.JOptionPane.YES_OPTION) {
+            // STORE TO LOGS THAT THE USER HAD CHECKOUT ACTION
+            String user = SessionData.currentUser;
 
-        // PROCESS EACH SELECTED BOOK
-        for (String code : SessionData.selectedBooks) {
+            // PROCESS EACH SELECTED BOOK
+            for (String code : SessionData.selectedBooks) {
 
-            // Find book by code
-            for (BookDatabase.Book b : BookDatabase.books) {
+                // Find book by code
+                for (BookDatabase.Book b : BookDatabase.books) {
 
-                if (b.code.equals(code)) {
+                    if (b.code.equals(code)) {
 
-                    // CHECK STOCK (extra safety)
-                    if (b.copies <= 0) {
-                        javax.swing.JOptionPane.showMessageDialog(
-                                this,
-                                "Book out of stock: " + b.title
+                        // CHECK STOCK (extra safety)
+                        if (b.copies <= 0) {
+                            javax.swing.JOptionPane.showMessageDialog(
+                                    this,
+                                    "Book out of stock: " + b.title
+                            );
+                            return;
+                        }
+
+                        // DECREASE ONLY HERE (FINAL FIX)
+                        b.copies--;
+
+                        // SAVE BORROW RECORD (NEW - SAFE ADDITION)
+                        SessionData.borrowedBooks.add(
+                                new UserBorrowedBooks(
+                                        user,
+                                        b.title,
+                                        b.code
+                                )
                         );
-                        return;
+
+                        // LOG
+                        LogsDatabase.addLog(
+                                user,
+                                "CHECKOUT",
+                                b.title
+                        );
+
+                        break;
                     }
-
-                    // DECREASE ONLY HERE (FINAL FIX)
-                    b.copies--;
-
-                    // SAVE BORROW RECORD (NEW - SAFE ADDITION)
-                    SessionData.borrowedBooks.add(
-                            new UserBorrowedBooks(
-                                    user,
-                                    b.title,
-                                    b.code
-                            )
-                    );
-
-                    // LOG
-                    LogsDatabase.addLog(
-                            user,
-                            "CHECKOUT",
-                            b.title
-                    );
-
-                    break;
                 }
             }
+
+            // Clear session AFTER processing
+            SessionData.selectedBooks.clear();
+
+            JOptionPane.showMessageDialog(this, "Checkout Confirmed.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            new FormPage().setVisible(true);
+            this.dispose();
         }
-
-        // Clear session AFTER processing
-        SessionData.selectedBooks.clear();
-
-        JOptionPane.showMessageDialog(this, "Checkout Confirmed.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-        new FormPage().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        LibraryPage page = new LibraryPage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -257,8 +259,8 @@ public class CheckoutPage extends javax.swing.JFrame {
     private void loadSelectedBooks() {
         // Define columns
         String[] columns = {
-            "Book Title",
-            "Book Code"
+            "BOOK TITLE",
+            "BOOK CODE"
         };
 
         // Use DefaultTableModel (dynamic, no manual array sizing)

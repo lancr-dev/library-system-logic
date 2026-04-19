@@ -125,7 +125,7 @@ public class LogInPage extends javax.swing.JFrame {
         // IF USERNAME IS EMPTY OR PASSWORD IS EMPTY > ERROR MESSAGE
         if (username.isEmpty() || password.isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "All fields are required", "Authentication Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "All fields are required", "Authentication Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -154,13 +154,15 @@ public class LogInPage extends javax.swing.JFrame {
             
         } else {
             // IF USERNAME AND PASSWORD IS NOT VALID > ERROR MESSAGE
-            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Authentication Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Authentication Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
 
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        HomePage page = new HomePage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 

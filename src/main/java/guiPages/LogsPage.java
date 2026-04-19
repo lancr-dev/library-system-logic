@@ -98,6 +98,7 @@ public class LogsPage extends javax.swing.JFrame {
             }
         ));
         logsTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
+        logsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(logsTable);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -175,37 +176,42 @@ public class LogsPage extends javax.swing.JFrame {
     private void loadLogs() {
         // DEFINE TABLE COLUMNS
         String[] columns = {
-            "Username",
-            "Action",
-            "Book",
-            "Date"
+            "USERNAME",
+            "ACTION",
+            "BOOK",
+            "DATE"
         };
-        
+
         // CREATE DATA CONTAINER | Rows = number of logs | Columns = 4
         Object[][] data =
                 new Object[LogsDatabase.logs.size()][4];
-        
-        // LOOP THROUGH LOGS | iterate through all stored logs.
+
+        // LOOP THROUGH LOGS
         for (int i = 0; i < LogsDatabase.logs.size(); i++) {
-            
+
             // Get each log object 
             LogsDatabase.Log log =
                     LogsDatabase.logs.get(i);
-            
-            // Each log contains: username, action, bookTitle, and date
+
+            // Populate row data
             data[i][0] = log.username;
             data[i][1] = log.action;
             data[i][2] = log.bookTitle;
             data[i][3] = log.date;
         }
-        
-        // CREATE THE TABLE MODEL
+
+        // CREATE NON-EDITABLE TABLE MODEL
         javax.swing.table.DefaultTableModel model =
                 new javax.swing.table.DefaultTableModel(
                         data,
                         columns
-                );
-        
+                ) {
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false; // disable editing
+                    }
+                };
+
         // SET MODEL TO TABLE
         logsTable.setModel(model);
     }

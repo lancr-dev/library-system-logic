@@ -195,10 +195,12 @@ public class HomePage extends javax.swing.JFrame {
             // NAVIGATE TO HOME PAGE AGAIN
             LogInPage page = new LogInPage();
             page.setVisible(true);
+            this.dispose();
         } else {
             // IF USER IS LOGGED IN > NAVIGATE TO RETURN BOOK PAGE
             ReturnBookPage page = new ReturnBookPage();
             page.setVisible(true);
+            this.dispose();
         }
 
     }//GEN-LAST:event_returnBookBtnActionPerformed
@@ -211,29 +213,40 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_logsBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        int result = javax.swing.JOptionPane.showConfirmDialog(
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
             this,
             "Do you really want to logout?",
             "Logout Confirmation",
             javax.swing.JOptionPane.YES_NO_OPTION
         );
 
-        if (result == javax.swing.JOptionPane.YES_OPTION) {
-            // perform the action
+        // Exit early if user selects NO
+        if (userChoice != javax.swing.JOptionPane.YES_OPTION) {
+            return;
         }
-        // IF USER LOGOUT > CREATE LOG
-        LogsDatabase.addLog(
-            SessionData.currentUser,
-            "LOGOUT",
-            "-"
-        );
-        // THEN CURRENT USER WILL BE NULL/NONE
+
+        // Defensive check before logging
+        if (SessionData.currentUser != null) {
+            LogsDatabase.addLog(
+                SessionData.currentUser,
+                "LOGOUT",
+                "-"
+            );
+        }
+
+        // Clear session
         SessionData.currentUser = null;
 
+        // Update UI state
         updateUIState();
 
-        // SEND LOGOUT MESSAGE
-        javax.swing.JOptionPane.showMessageDialog(this, "Logged out sucessfully.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        // Notify user
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Logged out successfully.",
+            "Success",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void goLibraryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goLibraryBtnActionPerformed
@@ -245,6 +258,7 @@ public class HomePage extends javax.swing.JFrame {
             // NAVIGATE TO HOME PAGE AGAIN
             LogInPage page = new LogInPage();
             page.setVisible(true);
+            this.dispose();
             return;
         }
 
@@ -258,24 +272,28 @@ public class HomePage extends javax.swing.JFrame {
         // IF USER CLICKED SIGN IN BUTTON > NAVIGATE TO SIGN IN PAGE
         SignInPage page = new SignInPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_signBtnActionPerformed
 
     private void logBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logBtnActionPerformed
         // IF USER CLICKED LOG IN BUTTON > NAVIGATE TO LOGIN PAGE
         LogInPage page = new LogInPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_logBtnActionPerformed
 
     private void manageBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageBooksBtnActionPerformed
         // TODO add your handling code here:
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageBooksBtnActionPerformed
 
     private void borrowedBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowedBooksBtnActionPerformed
         // TODO add your handling code here:
         UserBorrowedBooksPage page = new UserBorrowedBooksPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_borrowedBooksBtnActionPerformed
 
     /**
