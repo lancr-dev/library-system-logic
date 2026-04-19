@@ -79,7 +79,7 @@ public class FormPage extends javax.swing.JFrame {
         jLabel7.setText("IN-LIBRARY BOOK USAGE FORM");
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 51));
         jLabel6.setText("Reminder/Take Note:");
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
@@ -120,25 +120,23 @@ public class FormPage extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(2, 2, 2)
-                                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(submitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jLabel12))
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(idField, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                                    .addComponent(courseField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(submitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(19, 19, 19)
+                                            .addComponent(jLabel12))
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)
+                                        .addComponent(idField, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                        .addComponent(courseField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,13 +208,13 @@ public class FormPage extends javax.swing.JFrame {
         // IF DATA IS EMPTY OR ID IS EMPTY OR COURSE IS EMPTY > ERROR MESSAGE
         if (date.isEmpty() || idText.isEmpty() || course.isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "All fields are required!", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "All fields are required!", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         // IF USER TYPED DATA THAT IS NOT MATCHES TO GIVEN FORMAT > ERROR MESSAGE || THIS IS A REGEX METHOD
         if (!date.matches("\\d+/\\d+/\\d+")) {
 
-            JOptionPane.showMessageDialog(this, "Date Format: MM/DD/YYYY", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Date Format: MM/DD/YYYY", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         LocalDate today = LocalDate.now();
@@ -227,7 +225,7 @@ public class FormPage extends javax.swing.JFrame {
                 + today.getYear();
         if (!date.equals(currentDate)) {
 
-            JOptionPane.showMessageDialog(this, "Date must be today: " + currentDate, "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Date must be today: " + currentDate, "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -235,12 +233,12 @@ public class FormPage extends javax.swing.JFrame {
         int id;
         
         if(idText.length() != 9 || idText.length() > 9){
-            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         if(courseField.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(this, "Please select your course.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select your course.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -251,7 +249,7 @@ public class FormPage extends javax.swing.JFrame {
 
         } catch (Exception e) {
             // IF USER DO NOT TYPE INTEGER IN STUDENT ID > ERROR MESSAGE
-            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         

@@ -65,6 +65,7 @@ public class RegisteredPage extends javax.swing.JFrame {
             }
         ));
         registeredTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
+        registeredTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(registeredTable);
 
         jScrollPane1.setViewportView(jScrollPane2);
@@ -161,7 +162,7 @@ public class RegisteredPage extends javax.swing.JFrame {
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel();
 
         // Set column names (NO password)
-        model.setColumnIdentifiers(new String[]{"Username", "Email", "Course", "Student ID"});
+        model.setColumnIdentifiers(new String[]{"USERNAME", "EMAIL", "COURSE", "STUDENT ID"});
 
         // Loop through users and add to table
         for (UserDatabase.User user : UserDatabase.users) {

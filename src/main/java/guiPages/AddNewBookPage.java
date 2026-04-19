@@ -128,7 +128,7 @@ public class AddNewBookPage extends javax.swing.JFrame {
 
         // Validate empty fields
         if (title.isEmpty() || author.isEmpty() || code.isEmpty() || copiesText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill all fields.");
+            JOptionPane.showMessageDialog(this, "All fields are required.");
             return;
         }
 
@@ -169,6 +169,8 @@ public class AddNewBookPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        BookManagementPage page = new BookManagementPage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

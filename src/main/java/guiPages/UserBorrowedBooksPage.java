@@ -64,6 +64,8 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Below a list of books you have borrowed from the library.");
 
+        borrowedBooksTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 0)));
+        borrowedBooksTable.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         borrowedBooksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -75,6 +77,8 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        borrowedBooksTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
+        borrowedBooksTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(borrowedBooksTable);
 
         returnBtn.setBackground(new java.awt.Color(153, 255, 102));
@@ -141,6 +145,8 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        HomePage page = new HomePage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -148,6 +154,7 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         ReturnBookPage page = new ReturnBookPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_returnBtnActionPerformed
 
     /**
@@ -189,27 +196,32 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
 
     private void loadBorrowedBooksTable() {
         // Define table columns
-    String[] columns = {"Title", "Code"};
+        String[] columns = {"TITLE", "CODE"};
 
-    // Create table model
-    DefaultTableModel model = new DefaultTableModel(columns, 0);
+        // Create NON-EDITABLE table model
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // prevent editing for all cells
+            }
+        };
 
-    // Loop through all borrowed records
-    for (UserBorrowedBooks record : SessionData.borrowedBooks) {
+        // Loop through all borrowed records
+        for (UserBorrowedBooks record : SessionData.borrowedBooks) {
 
-        // Only show books for current logged-in user
-        if (record.username.equals(SessionData.currentUser)) {
+            // Only show books for current logged-in user
+            if (record.username.equals(SessionData.currentUser)) {
 
-            Object[] row = {
-                record.title,
-                record.code
-            };
+                Object[] row = {
+                    record.title,
+                    record.code
+                };
 
-            model.addRow(row);
+                model.addRow(row);
+            }
         }
-    }
 
-    // Set model to JTable
-    borrowedBooksTable.setModel(model);
+        // Set model to JTable
+        borrowedBooksTable.setModel(model);
     }
 }

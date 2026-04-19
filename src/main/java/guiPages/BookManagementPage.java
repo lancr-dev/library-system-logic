@@ -45,6 +45,7 @@ public class BookManagementPage extends javax.swing.JFrame {
         addNewBookBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        addBookQuantityBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,6 +95,7 @@ public class BookManagementPage extends javax.swing.JFrame {
             }
         ));
         bookManagementTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
+        bookManagementTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(bookManagementTable);
 
         jScrollPane1.setViewportView(jScrollPane2);
@@ -124,6 +126,13 @@ public class BookManagementPage extends javax.swing.JFrame {
         jLabel6.setText("© 2026 Library Management System. All rights reserved.");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 740, -1, -1));
 
+        addBookQuantityBtn.setBackground(new java.awt.Color(153, 255, 102));
+        addBookQuantityBtn.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        addBookQuantityBtn.setForeground(new java.awt.Color(0, 51, 0));
+        addBookQuantityBtn.setText("Add Book Copies");
+        addBookQuantityBtn.addActionListener(this::addBookQuantityBtnActionPerformed);
+        jPanel1.add(addBookQuantityBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 190, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
@@ -133,18 +142,29 @@ public class BookManagementPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         RemoveBookPage page = new RemoveBookPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_removeBookBtnActionPerformed
 
     private void addNewBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBookBtnActionPerformed
         // TODO add your handling code here:
         AddNewBookPage page = new AddNewBookPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addNewBookBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        HomePage page = new HomePage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void addBookQuantityBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookQuantityBtnActionPerformed
+        // TODO add your handling code here:
+        AddBookQuantityPage page = new AddBookQuantityPage();
+        page.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_addBookQuantityBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +192,7 @@ public class BookManagementPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBookQuantityBtn;
     private javax.swing.JButton addNewBookBtn;
     private javax.swing.JButton backBtn;
     private javax.swing.JTable bookManagementTable;
@@ -193,14 +214,19 @@ public class BookManagementPage extends javax.swing.JFrame {
 
         // Column headers
         String[] columns = {
-            "Title",
-            "Author",
-            "Code",
-            "Copies"
+            "TITLE",
+            "AUTHOR",
+            "CODE",
+            "COPIES"
         };
 
-        // Create model
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        // Create NON-EDITABLE model
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         // Populate rows
         for (BookDatabase.Book book : BookDatabase.books) {
@@ -208,12 +234,12 @@ public class BookManagementPage extends javax.swing.JFrame {
                 book.title,
                 book.author,
                 book.code,
-                book.copies
+                (book.copies == 0) ? "OUT OF STOCK" : book.copies
             };
             model.addRow(row);
         }
 
         // Attach to JTable
         bookManagementTable.setModel(model);
-        }
+    }
 }

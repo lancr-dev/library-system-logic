@@ -47,6 +47,21 @@ public class BookDatabase {
         return true;
     }
 
+    public static boolean addCopies(String code, int quantity) {
+        for (Book book : books) {
+
+            if (book.code.equalsIgnoreCase(code)) {
+
+                if (quantity <= 0) return false;
+
+                book.copies += quantity;
+                return true;
+            }
+        }
+
+        return false; // Book not found
+    }
+
     public static class Book {
         // CREATE MODEL / VARIABLES FOR title, author, code, copies
         public String title;

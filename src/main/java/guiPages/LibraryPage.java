@@ -94,6 +94,7 @@ public class LibraryPage extends javax.swing.JFrame {
         ));
         bookTable.setGridColor(new java.awt.Color(255, 255, 255));
         bookTable.setSelectionBackground(new java.awt.Color(0, 51, 0));
+        bookTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(bookTable);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -122,46 +123,56 @@ public class LibraryPage extends javax.swing.JFrame {
         javax.swing.table.TableModel model = bookTable.getModel();
         int count = 0; // Tracks how many books selected 
         
-        // Loop through all rows | You check every row in the table.
-        for (int i = 0; i < model.getRowCount(); i++) {
-            
-            Boolean selected = (Boolean) model.getValueAt(i, 4); // last column checkbox | will check if checkbox is selected
-            if (selected != null && selected) { // Only proceed if user checked it
-                
-                // Prevent selecting out-of-stock
-                Object copiesObj = model.getValueAt(i, 3);
-                if (copiesObj.toString().equals("OUT OF STOCK")) { // Extra safety check
-                    JOptionPane.showMessageDialog(this, "Book out of stock.", "No book was found", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                
-                // User can only borrow max 3 books | so if they selected more than 3 > error message
-                count++;
-                if (count > 3) {
-                    JOptionPane.showMessageDialog(this, "Only up to 3 books allowed at a time.", "Limitation", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Proceed to checkout?",
+            "Confirmation",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
 
-                // Get book code to identify the book
-                String code = model.getValueAt(i, 2).toString();
-                SessionData.selectedBooks.add(code);
+        if (userChoice == javax.swing.JOptionPane.YES_OPTION){
+            // Loop through all rows | You check every row in the table.
+            for (int i = 0; i < model.getRowCount(); i++) {
+
+                Boolean selected = (Boolean) model.getValueAt(i, 4); // last column checkbox | will check if checkbox is selected
+                if (selected != null && selected) { // Only proceed if user checked it
+
+                    // Prevent selecting out-of-stock
+                    Object copiesObj = model.getValueAt(i, 3);
+                    if (copiesObj.toString().equals("OUT OF STOCK")) { // Extra safety check
+                        JOptionPane.showMessageDialog(this, "Book out of stock.", "No book was found", javax.swing.JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    // User can only borrow max 3 books | so if they selected more than 3 > error message
+                    count++;
+                    if (count > 3) {
+                        JOptionPane.showMessageDialog(this, "Only up to 3 books allowed at a time.", "Limitation", javax.swing.JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    // Get book code to identify the book
+                    String code = model.getValueAt(i, 2).toString();
+                    SessionData.selectedBooks.add(code);
+                }
             }
-        }
-        
-        // If nothing selected > Prevent empty checkout
-        if (count == 0) {
-            JOptionPane.showMessageDialog(this, "No book/s selected. Select at least 1.", "No book was found", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
-        // Clear or reset checkboxes after checkout
-        for (int i = 0; i < model.getRowCount(); i++) {
-            model.setValueAt(false, i, 4);
+            // If nothing selected > Prevent empty checkout
+            if (count == 0) {
+                JOptionPane.showMessageDialog(this, "No book/s selected. Select at least 1.", "No book was found", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Clear or reset checkboxes after checkout
+            for (int i = 0; i < model.getRowCount(); i++) {
+                model.setValueAt(false, i, 4);
+            }
+
+            // Navigate to CheckoutPage
+            CheckoutPage page = new CheckoutPage();
+            page.setVisible(true);
+            this.dispose();
         }
-        
-        // Navigate to CheckoutPage
-        CheckoutPage page = new CheckoutPage();
-        page.setVisible(true);
     }//GEN-LAST:event_checkoutBtnActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -214,11 +225,11 @@ public class LibraryPage extends javax.swing.JFrame {
     private void loadTable() {
         // DEFINE THE TABLE COLUMNS/HEADERS
         String[] columns = {
-            "Title",
-            "Author",
-            "Code",
-            "Copies",
-            "Select"   // checkbox at the end
+            "TITLE",
+            "AUTHOR",
+            "CODE",
+            "COPIES",
+            "SELECT"   // checkbox at the end
         };
         
         // CREATE TABLE DATA CONTAINER | Rows = number of books and Columns = 5

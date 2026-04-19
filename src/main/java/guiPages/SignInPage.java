@@ -68,7 +68,7 @@ public class SignInPage extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 51));
         jLabel1.setText("User Agreement & Privacy Policy.");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, -1));
 
@@ -123,7 +123,7 @@ public class SignInPage extends javax.swing.JFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 51));
         jLabel8.setText("By clicking register now, you agree to CvSU's ");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, -1, -1));
 
@@ -162,7 +162,7 @@ public class SignInPage extends javax.swing.JFrame {
         // IF USERNAME IS EMPTY OR EMAIL IS EMPTY OR PASSWORD IS EMPTY > ERROR MESSAGE
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || studentIdText.isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "All fields are required!", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "All fields are required!", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         int studentId = Integer.parseInt(studentIdText);
@@ -170,52 +170,53 @@ public class SignInPage extends javax.swing.JFrame {
         // IF USERNAME LENGTH IS LESS THAN 3 > ERROR MESSAGE
         if (username.length() < 3 || username.length() > 20) {
 
-            JOptionPane.showMessageDialog(this, "Username must be 3–20 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username must be 3–20 characters.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         if(!username.matches("[a-zA-Z]+")){
-            JOptionPane.showMessageDialog(this, "Username must contain letters only.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username must contain letters only.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         // IF EMAIL LENGTH IS LESS THAN 3 OR EMAIL IS NOT ENDS WITH "@gmail.com" > ERROR MESSAGE
         if (email.length() < 3 || email.length() > 32 || !email.endsWith("@cvsu.edu.ph")) {
 
-            JOptionPane.showMessageDialog(this, "Invalid format. Email must be @cvsu.edu.ph", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid format. Email must be @cvsu.edu.ph", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         if(studentCourse.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(this, "Please select your course.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select your course.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         if(studentIdText.length() !=9 || studentIdText.length() > 9){
-            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         // IF PASSWORD LENGTH IS LESS THAN 3 > ERROR MESSAGE
         if (password.length() < 3 || password.length() > 20) {
 
-            JOptionPane.showMessageDialog(this, "Password must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Password must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         // IF PASSWORD IS NOT EQUAL TO CONFIRM PASSWORD > ERROR MESSAGE
         if(!password.equals(confirm)){
             
-            JOptionPane.showMessageDialog(this, "Confirm password did not match.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Confirm password did not match.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
         
         // CHECK IF DUPLICATE: IF USERNAME HAVE THE SAME FROM THE USER DATABASE > ERROR MESSAGE
         for (UserDatabase.User u : UserDatabase.users) {
 
             if (u.username.equals(username)) {
 
-                JOptionPane.showMessageDialog(this, "Username already exist.", "Sign Up Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Username already exist.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
@@ -238,6 +239,8 @@ public class SignInPage extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        HomePage page = new HomePage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
