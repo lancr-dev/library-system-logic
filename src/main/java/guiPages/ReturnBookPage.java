@@ -3,7 +3,7 @@ import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
 import javax.swing.JOptionPane;
-import systemData.UserBorrowedBooks;
+import systemData.UserBorrowedBooksDatabase;
 
 /**
  *
@@ -48,6 +48,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
         codeField5 = new javax.swing.JTextField();
         submitBtn = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,6 +69,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
 
         codeField1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        codeField1.addActionListener(this::codeField1ActionPerformed);
         jPanel1.add(codeField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 200, -1));
         jPanel1.add(codeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 200, -1));
 
@@ -121,6 +123,9 @@ public class ReturnBookPage extends javax.swing.JFrame {
         jLabel9.setText("This will process book return.");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
+        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu stroke.png")); // NOI18N
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 500));
 
         pack();
@@ -153,9 +158,9 @@ public class ReturnBookPage extends javax.swing.JFrame {
                 boolean found = false;
 
                 // STEP 1: Check if user actually borrowed this book
-                UserBorrowedBooks recordToRemove = null;
+                UserBorrowedBooksDatabase recordToRemove = null;
 
-                for (UserBorrowedBooks record : SessionData.borrowedBooks) {
+                for (UserBorrowedBooksDatabase record : SessionData.borrowedBooks) {
                     if (record.username.equals(SessionData.currentUser)
                             && record.code.equalsIgnoreCase(code)) {
 
@@ -168,7 +173,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
                 if (recordToRemove == null) {
                     JOptionPane.showMessageDialog(
                             this,
-                            "You can only return books that you have borrowed. \n Please double check the book codes.",
+                            "You can only return books that you have borrowed.\n Please double check the book codes.",
                             "Invalid Book Code",
                             javax.swing.JOptionPane.WARNING_MESSAGE
                     );
@@ -224,6 +229,10 @@ public class ReturnBookPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void codeField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codeField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +266,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
     private javax.swing.JTextField codeField4;
     private javax.swing.JTextField codeField5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

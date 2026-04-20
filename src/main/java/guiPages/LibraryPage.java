@@ -37,6 +37,10 @@ public class LibraryPage extends javax.swing.JFrame {
         bookTable = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,7 +56,7 @@ public class LibraryPage extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Our Collection");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Cambria", 1, 120)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 255, 204));
@@ -111,6 +115,18 @@ public class LibraryPage extends javax.swing.JFrame {
         jLabel7.setText("© 2026 Library Management System. All rights reserved.");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, -1, -1));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu.png")); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 30, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\book.png")); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 40, 50));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\books 40px.png")); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 40, 50));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cart.png")); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 180, 40, 50));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
@@ -146,8 +162,8 @@ public class LibraryPage extends javax.swing.JFrame {
 
                     // User can only borrow max 3 books | so if they selected more than 3 > error message
                     count++;
-                    if (count > 3) {
-                        JOptionPane.showMessageDialog(this, "Only up to 3 books allowed at a time.", "Limitation", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    if (count > 5) {
+                        JOptionPane.showMessageDialog(this, "Only up to 5 books allowed at a time.", "Limitation", javax.swing.JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
@@ -159,7 +175,7 @@ public class LibraryPage extends javax.swing.JFrame {
 
             // If nothing selected > Prevent empty checkout
             if (count == 0) {
-                JOptionPane.showMessageDialog(this, "No book/s selected. Select at least 1.", "No book was found", javax.swing.JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No book/s selected.\nSelect at least 1.", "No book was found", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -212,11 +228,15 @@ public class LibraryPage extends javax.swing.JFrame {
     private javax.swing.JTable bookTable;
     private javax.swing.JButton checkoutBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
