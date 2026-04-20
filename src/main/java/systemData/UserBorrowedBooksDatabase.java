@@ -8,7 +8,7 @@ package systemData;
  *
  * @author Admin
  */
-public class UserBorrowedBooks {
+public class UserBorrowedBooksDatabase {
     // STORES the username of the person who borrowed the book
     public String username;
 
@@ -28,7 +28,7 @@ public class UserBorrowedBooks {
      * @param title    - the title of the book
      * @param code     - the unique book code
      */
-    public UserBorrowedBooks(String username, String title, String code) {
+    public UserBorrowedBooksDatabase(String username, String title, String code) {
         this.username = username;
         this.title = title;
         this.code = code;

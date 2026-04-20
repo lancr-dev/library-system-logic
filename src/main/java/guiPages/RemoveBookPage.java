@@ -4,7 +4,6 @@
  */
 package guiPages;
 import systemData.BookDatabase;
-import javax.swing.JOptionPane;
 /**
  *
  * @author Admin
@@ -31,179 +30,131 @@ public class RemoveBookPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         codeField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        removeBookBtn = new javax.swing.JButton();
-        quantityField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        removeSpecificBookBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(58, 93, 46));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Remove Book/s");
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel1.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Enter the code of the book to remove.");
+        jLabel5.setText("Enter the details of the book.");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Code:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
         codeField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jPanel1.add(codeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 260, -1));
 
-        jLabel6.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Code:");
-
-        removeBookBtn.setBackground(new java.awt.Color(153, 255, 102));
-        removeBookBtn.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        removeBookBtn.setForeground(new java.awt.Color(0, 51, 0));
-        removeBookBtn.setText("Remove");
-        removeBookBtn.addActionListener(this::removeBookBtnActionPerformed);
-
-        quantityField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Quantity:");
-
-        jButton1.setBackground(new java.awt.Color(153, 255, 102));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 0));
-        jButton1.setText("Back");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("@Cvsu Library Management System");
+        removeSpecificBookBtn.setBackground(new java.awt.Color(153, 255, 102));
+        removeSpecificBookBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        removeSpecificBookBtn.setForeground(new java.awt.Color(0, 51, 0));
+        removeSpecificBookBtn.setText("REMOVE BOOK");
+        removeSpecificBookBtn.addActionListener(this::removeSpecificBookBtnActionPerformed);
+        jPanel1.add(removeSpecificBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 260, -1));
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 51));
         jLabel3.setText("Please ensure the book code is correct.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(jLabel5))
-                                .addComponent(codeField)
-                                .addComponent(removeBookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel3)))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jButton1)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel6)
-                .addGap(5, 5, 5)
-                .addComponent(codeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removeBookBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(16, 16, 16))
-        );
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("@Cvsu Library Management System");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Remove Book");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\books 40px.png")); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 50, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void removeBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookBtnActionPerformed
+    private void removeSpecificBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSpecificBookBtnActionPerformed
         // TODO add your handling code here:
-        // Get input values
         String code = codeField.getText().trim();
-        String quantityText = quantityField.getText().trim();
-        int quantity;
-        
-        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
+
+        // Validation
+        if (code.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Please enter a book code.",
+                "Input Error",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // Confirm deletion (important UX)
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
             this,
-            "Are you sure you want to remove the book/s?",
-            "Confirmation",
+            "Are you sure you want to remove this book?",
+            "Confirm Removal",
             javax.swing.JOptionPane.YES_NO_OPTION
         );
 
-        if (userChoice == javax.swing.JOptionPane.YES_OPTION){
-            if(quantityText.isEmpty()){
-                quantityText = "10";
-            }
-            // Basic validation
-            if (code.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "All fields are required.");
-                return;
-            }
-
-            try {
-                quantity = Integer.parseInt(quantityText);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Quantity must be a number.");
-                return;
-            }
-
-            // Ensure books are loaded
-            BookDatabase.loadBooks();
-
-            // Perform removal
-            boolean success = BookDatabase.removeCopies(code, quantity);
-
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Book/s removed successfully.");
-            } else {
-                JOptionPane.showMessageDialog(this, 
-                    "Failed to remove copies.\nCheck code or available quantity.");
-            }
-
-            BookManagementPage page = new BookManagementPage();
-            page.setVisible(true);
-            this.dispose();
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
         }
-    }//GEN-LAST:event_removeBookBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Remove from database
+        boolean success = BookDatabase.removeBook(code);
+
+        if (!success) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Book not found.",
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Book removed successfully.",
+            "Success",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+
+        BookManagementPage page = new BookManagementPage();
+        page.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_removeSpecificBookBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,16 +182,15 @@ public class RemoveBookPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JTextField codeField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField quantityField;
-    private javax.swing.JButton removeBookBtn;
+    private javax.swing.JButton removeSpecificBookBtn;
     // End of variables declaration//GEN-END:variables
 }

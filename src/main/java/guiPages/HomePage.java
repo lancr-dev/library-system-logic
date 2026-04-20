@@ -43,6 +43,9 @@ public class HomePage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        cvsuLogo = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         goLibraryBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         logsBtn = new javax.swing.JButton();
@@ -52,6 +55,8 @@ public class HomePage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         manageBooksBtn = new javax.swing.JButton();
         borrowedBooksBtn = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        cvsuLogo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,45 +95,54 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Library System Management");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Cavite, Civic Center, Palico IV, Imus City, Cavite, 4103");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Tel: (046) 471-6607");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, -1));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("cvsulibrary@cvsu.edu.ph");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, -1, -1));
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, 140));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 2, 140));
 
         jLabel12.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Cavite State University - Imus Campus");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 50, -1, -1));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Copyright © CvSU Library System");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
+        jLabel3.setText("© 2026 Library Management System. All rights reserved.");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, -1, -1));
+
+        cvsuLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu.png")); // NOI18N
+        jPanel2.add(cvsuLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 30, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\facebook.png")); // NOI18N
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, -1));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\email.png")); // NOI18N
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1370, 160));
 
         goLibraryBtn.setBackground(new java.awt.Color(153, 255, 102));
-        goLibraryBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        goLibraryBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         goLibraryBtn.setForeground(new java.awt.Color(0, 51, 0));
         goLibraryBtn.setText("Go Library!");
         goLibraryBtn.addActionListener(this::goLibraryBtnActionPerformed);
-        jPanel1.add(goLibraryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, -1));
+        jPanel1.add(goLibraryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 50, -1, -1));
 
         logoutBtn.setBackground(new java.awt.Color(153, 255, 102));
         logoutBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -138,18 +152,18 @@ public class HomePage extends javax.swing.JFrame {
         jPanel1.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 440, -1, -1));
 
         logsBtn.setBackground(new java.awt.Color(204, 255, 204));
-        logsBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        logsBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         logsBtn.setForeground(new java.awt.Color(0, 51, 0));
         logsBtn.setText("Logs");
         logsBtn.addActionListener(this::logsBtnActionPerformed);
-        jPanel1.add(logsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 30, -1, -1));
+        jPanel1.add(logsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 50, -1, -1));
 
         returnBookBtn.setBackground(new java.awt.Color(204, 255, 204));
-        returnBookBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        returnBookBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         returnBookBtn.setForeground(new java.awt.Color(0, 51, 0));
         returnBookBtn.setText("Return Book");
         returnBookBtn.addActionListener(this::returnBookBtnActionPerformed);
-        jPanel1.add(returnBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, -1, -1));
+        jPanel1.add(returnBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 50, -1, -1));
 
         welcomeLabel.setBackground(new java.awt.Color(153, 255, 102));
         welcomeLabel.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -160,26 +174,30 @@ public class HomePage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cavite State University - Imus Campus");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("CvSU Library System");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
         manageBooksBtn.setBackground(new java.awt.Color(204, 255, 204));
-        manageBooksBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        manageBooksBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         manageBooksBtn.setForeground(new java.awt.Color(0, 51, 0));
         manageBooksBtn.setText("Book Management");
         manageBooksBtn.addActionListener(this::manageBooksBtnActionPerformed);
-        jPanel1.add(manageBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
+        jPanel1.add(manageBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 50, -1, -1));
 
         borrowedBooksBtn.setBackground(new java.awt.Color(204, 255, 204));
-        borrowedBooksBtn.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        borrowedBooksBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         borrowedBooksBtn.setForeground(new java.awt.Color(0, 51, 0));
         borrowedBooksBtn.setText("Borrowed Books");
         borrowedBooksBtn.addActionListener(this::borrowedBooksBtnActionPerformed);
-        jPanel1.add(borrowedBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
+        jPanel1.add(borrowedBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 350, 400));
+
+        cvsuLogo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu.png")); // NOI18N
+        jPanel1.add(cvsuLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
@@ -190,7 +208,7 @@ public class HomePage extends javax.swing.JFrame {
         // IF USER IS NOT LOGGED IN, CANNOT RETURN BOOK > ERROR MESSAGE
         if (SessionData.currentUser == null) {
 
-            JOptionPane.showMessageDialog(null, "You must login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You must Login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
             
             // NAVIGATE TO HOME PAGE AGAIN
             LogInPage page = new LogInPage();
@@ -215,7 +233,7 @@ public class HomePage extends javax.swing.JFrame {
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         int userChoice = javax.swing.JOptionPane.showConfirmDialog(
             this,
-            "Do you really want to logout?",
+            "Do you really want to Logout?",
             "Logout Confirmation",
             javax.swing.JOptionPane.YES_NO_OPTION
         );
@@ -253,7 +271,7 @@ public class HomePage extends javax.swing.JFrame {
         // IF USER IS NOT LOGGED IN, CANNOT GO TO LIBRARY PAGE > ERROR MESSAGE
         if (SessionData.currentUser == null) {
 
-            JOptionPane.showMessageDialog(null, "You must login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You must Login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
 
             // NAVIGATE TO HOME PAGE AGAIN
             LogInPage page = new LogInPage();
@@ -270,7 +288,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void signBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signBtnActionPerformed
         // IF USER CLICKED SIGN IN BUTTON > NAVIGATE TO SIGN IN PAGE
-        SignInPage page = new SignInPage();
+        SignUpPage page = new SignUpPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_signBtnActionPerformed
@@ -323,11 +341,14 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrowedBooksBtn;
+    private javax.swing.JLabel cvsuLogo;
+    private javax.swing.JLabel cvsuLogo1;
     private javax.swing.JButton goLibraryBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -335,9 +356,11 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton logBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton logsBtn;

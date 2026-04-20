@@ -7,19 +7,20 @@
 package guiPages;
 import systemData.UserDatabase;
 import javax.swing.JOptionPane;
+import java.util.Locale; // for email | converts everything to lowercase in a consistent way
 
 /**
  *
  * @author Admin
  */
-public class SignInPage extends javax.swing.JFrame {
+public class SignUpPage extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignInPage.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUpPage.class.getName());
 
     /**
      * Creates new form SignInPage
      */
-    public SignInPage() {
+    public SignUpPage() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -52,6 +53,7 @@ public class SignInPage extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         studentIdField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -144,6 +146,9 @@ public class SignInPage extends javax.swing.JFrame {
         jLabel10.setText("Confirm Password:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, -1));
 
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu stroke.png")); // NOI18N
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
         pack();
@@ -152,7 +157,7 @@ public class SignInPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // CREATE VARIABLE TO GET THE USERNAME, EMAIL, AND PASSWORD FROM THE TEXTFIELDS
         String username = usernameField.getText().trim();
-        String email = emailField.getText().trim();
+        String email = emailField.getText().trim().toLowerCase(Locale.ROOT);
         String password = new String(passwordField.getPassword());
         String confirm = new String(confirmPasswordField.getPassword());
         String course = new String(studentCourse.getSelectedItem().toString());
@@ -192,14 +197,14 @@ public class SignInPage extends javax.swing.JFrame {
         }
         
         if(studentIdText.length() !=9 || studentIdText.length() > 9){
-            JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter a valid student ID.", "Invalid ID format.", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         // IF PASSWORD LENGTH IS LESS THAN 3 > ERROR MESSAGE
         if (password.length() < 3 || password.length() > 20) {
 
-            JOptionPane.showMessageDialog(this, "Password must be at least 3 characters.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please use a strong password.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -216,7 +221,7 @@ public class SignInPage extends javax.swing.JFrame {
 
             if (u.username.equals(username)) {
 
-                JOptionPane.showMessageDialog(this, "Username already exist.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Username already exist.\n Please enter a new name.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
@@ -266,7 +271,7 @@ public class SignInPage extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new SignInPage().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new SignUpPage().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,6 +281,7 @@ public class SignInPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

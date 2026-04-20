@@ -46,6 +46,9 @@ public class BookManagementPage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         addBookQuantityBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,7 +59,7 @@ public class BookManagementPage extends javax.swing.JFrame {
         removeBookBtn.setBackground(new java.awt.Color(153, 255, 102));
         removeBookBtn.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         removeBookBtn.setForeground(new java.awt.Color(0, 51, 0));
-        removeBookBtn.setText("Remove Book/s");
+        removeBookBtn.setText("Remove Copies");
         removeBookBtn.addActionListener(this::removeBookBtnActionPerformed);
         jPanel1.add(removeBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 190, -1, -1));
 
@@ -78,7 +81,7 @@ public class BookManagementPage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("List of Books");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
         bookManagementTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 0)));
         bookManagementTable.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
@@ -114,7 +117,7 @@ public class BookManagementPage extends javax.swing.JFrame {
         addNewBookBtn.setForeground(new java.awt.Color(0, 51, 0));
         addNewBookBtn.setText("Add New Book");
         addNewBookBtn.addActionListener(this::addNewBookBtnActionPerformed);
-        jPanel1.add(addNewBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jPanel1.add(addNewBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,9 +132,22 @@ public class BookManagementPage extends javax.swing.JFrame {
         addBookQuantityBtn.setBackground(new java.awt.Color(153, 255, 102));
         addBookQuantityBtn.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         addBookQuantityBtn.setForeground(new java.awt.Color(0, 51, 0));
-        addBookQuantityBtn.setText("Add Book Copies");
+        addBookQuantityBtn.setText("Add Copies");
         addBookQuantityBtn.addActionListener(this::addBookQuantityBtnActionPerformed);
-        jPanel1.add(addBookQuantityBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 190, -1, -1));
+        jPanel1.add(addBookQuantityBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 190, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(153, 255, 102));
+        jButton1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 51, 0));
+        jButton1.setText("Remove Book");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\books.png")); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 50, 50));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu.png")); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 20, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
@@ -140,7 +156,7 @@ public class BookManagementPage extends javax.swing.JFrame {
 
     private void removeBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookBtnActionPerformed
         // TODO add your handling code here:
-        RemoveBookPage page = new RemoveBookPage();
+        RemoveCopiesPage page = new RemoveCopiesPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeBookBtnActionPerformed
@@ -161,10 +177,17 @@ public class BookManagementPage extends javax.swing.JFrame {
 
     private void addBookQuantityBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookQuantityBtnActionPerformed
         // TODO add your handling code here:
-        AddBookQuantityPage page = new AddBookQuantityPage();
+        AddCopiesPage page = new AddCopiesPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBookQuantityBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        RemoveBookPage page = new RemoveBookPage();
+        page.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,12 +219,15 @@ public class BookManagementPage extends javax.swing.JFrame {
     private javax.swing.JButton addNewBookBtn;
     private javax.swing.JButton backBtn;
     private javax.swing.JTable bookManagementTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

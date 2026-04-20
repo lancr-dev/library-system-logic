@@ -62,6 +62,19 @@ public class BookDatabase {
         return false; // Book not found
     }
 
+    public static boolean removeBook(String code) {
+        if (code == null || code.trim().isEmpty()) return false;
+
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).code.equalsIgnoreCase(code)) {
+                books.remove(i);
+                return true;
+            }
+        }
+
+        return false; // Book not found
+    }
+
     public static class Book {
         // CREATE MODEL / VARIABLES FOR title, author, code, copies
         public String title;

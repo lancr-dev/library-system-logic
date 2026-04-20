@@ -14,5 +14,5 @@ public class SessionData {
     public static ArrayList<String> selectedBooks = new ArrayList<>();
     // WHY ARRAY STRINGS? BECAUSE WE ONLY STORE BOOK NAMES, NOT FULL OBJECT
     
-    public static ArrayList<UserBorrowedBooks> borrowedBooks = new ArrayList<>();
+    public static ArrayList<UserBorrowedBooksDatabase> borrowedBooks = new ArrayList<>();
 }
