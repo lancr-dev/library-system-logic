@@ -304,10 +304,17 @@
               <Font name="Cambria" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="10">
                 <StringItem index="0" value="Select..."/>
                 <StringItem index="1" value="BSCS"/>
                 <StringItem index="2" value="BSIT"/>
+                <StringItem index="3" value="BSBA"/>
+                <StringItem index="4" value="BSHM"/>
+                <StringItem index="5" value="BENT"/>
+                <StringItem index="6" value="BAJOURN"/>
+                <StringItem index="7" value="BSPSYCH"/>
+                <StringItem index="8" value="BSOA"/>
+                <StringItem index="9" value="BSED"/>
               </StringArray>
             </Property>
           </Properties>

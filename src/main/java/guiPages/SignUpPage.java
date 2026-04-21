@@ -130,7 +130,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, -1, -1));
 
         studentCourse.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        studentCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT" }));
+        studentCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT", "BSBA", "BSHM", "BENT", "BAJOURN", "BSPSYCH", "BSOA", "BSED" }));
         jPanel2.add(studentCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 250, -1));
 
         jLabel9.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
