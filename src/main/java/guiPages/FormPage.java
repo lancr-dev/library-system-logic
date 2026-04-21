@@ -126,7 +126,7 @@ public class FormPage extends javax.swing.JFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 345, -1, -1));
 
         courseField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        courseField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT" }));
+        courseField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT", "BSBA", "BSHM", "BENT", "BAJOURN", "BSPSYCH", "BSOA", "BSED" }));
         courseField.addActionListener(this::courseFieldActionPerformed);
         jPanel1.add(courseField, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 303, 243, -1));
 

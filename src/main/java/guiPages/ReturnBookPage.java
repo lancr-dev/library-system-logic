@@ -140,26 +140,33 @@ public class ReturnBookPage extends javax.swing.JFrame {
         );
 
         if (userChoice == javax.swing.JOptionPane.YES_OPTION) {
+
             String[] codes = {
                 codeField1.getText().trim(),
                 codeField2.getText().trim(),
-                codeField3.getText().trim()
+                codeField3.getText().trim(),
+                codeField4.getText().trim(),
+                codeField5.getText().trim()
             };
 
             int returned = 0;
             int totalEntered = 0;
 
+            // TEMP STORAGE (for atomic operation)
+            java.util.ArrayList<UserBorrowedBooksDatabase> recordsToReturn = new java.util.ArrayList<>();
+
+            // =========================
+            // PHASE 1: VALIDATION ONLY
+            // =========================
             for (String code : codes) {
 
                 if (code.isEmpty()) continue;
 
-                totalEntered++; // track how many user actually entered
+                totalEntered++;
 
-                boolean found = false;
-
-                // STEP 1: Check if user actually borrowed this book
                 UserBorrowedBooksDatabase recordToRemove = null;
 
+                // Check if user actually borrowed this book
                 for (UserBorrowedBooksDatabase record : SessionData.borrowedBooks) {
                     if (record.username.equals(SessionData.currentUser)
                             && record.code.equalsIgnoreCase(code)) {
@@ -169,20 +176,39 @@ public class ReturnBookPage extends javax.swing.JFrame {
                     }
                 }
 
-                // IF NOT BORROWED BY USER → ERROR
+                // If invalid → STOP EVERYTHING
                 if (recordToRemove == null) {
                     JOptionPane.showMessageDialog(
                             this,
-                            "You can only return books that you have borrowed.\n Please double check the book codes.",
+                            "You can only return books that you have borrowed.\nPlease double check the book codes.",
                             "Invalid Book Code",
                             javax.swing.JOptionPane.WARNING_MESSAGE
                     );
                     return;
                 }
 
-                // STEP 2: Find the book in database and update copies
+                // Store valid record for execution phase
+                recordsToReturn.add(recordToRemove);
+            }
+
+            // IF NO USER INPUT
+            if (totalEntered == 0) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Please enter at least one book code.",
+                        "Returning Book Failed",
+                        javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // =========================
+            // PHASE 2: EXECUTION
+            // =========================
+            for (UserBorrowedBooksDatabase record : recordsToReturn) {
+
                 for (BookDatabase.Book b : BookDatabase.books) {
-                    if (b.code.equalsIgnoreCase(code)) {
+                    if (b.code.equalsIgnoreCase(record.code)) {
 
                         b.copies++;
 
@@ -193,29 +219,21 @@ public class ReturnBookPage extends javax.swing.JFrame {
                         );
 
                         returned++;
-                        found = true;
                         break;
                     }
                 }
 
-                // STEP 3: Remove from borrowed records
-                SessionData.borrowedBooks.remove(recordToRemove);
-
-                // IF ONE CODE IS INVALID
-                if (!found) {
-                    JOptionPane.showMessageDialog(this, "Some book code/s are not valid. Please make sure the book code and try again.", "Returning Book Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
-                    return; // stop everything immediately
-                }
+                // Remove from borrowed records
+                SessionData.borrowedBooks.remove(record);
             }
 
-            // IF NO USER INPUT > ERROR MESSAGE
-            if (totalEntered == 0) {
-                JOptionPane.showMessageDialog(this, "Please enter at least one book code.", "Returning Book Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // IF USER SUCCEED > SUCCESS MESSAGE
-            javax.swing.JOptionPane.showMessageDialog(this, "Returned: " + returned, "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            // SUCCESS MESSAGE
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Returned: " + returned,
+                    "Success",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
 
             new HomePage().setVisible(true);
             this.dispose();

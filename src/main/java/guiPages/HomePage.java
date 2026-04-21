@@ -55,8 +55,8 @@ public class HomePage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         manageBooksBtn = new javax.swing.JButton();
         borrowedBooksBtn = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
         cvsuLogo1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,14 +72,14 @@ public class HomePage extends javax.swing.JFrame {
         jLabel2.setText("with us!");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, -1, -1));
 
-        logBtn.setBackground(new java.awt.Color(204, 255, 204));
+        logBtn.setBackground(new java.awt.Color(153, 255, 102));
         logBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         logBtn.setForeground(new java.awt.Color(0, 51, 0));
         logBtn.setText("Log in");
         logBtn.addActionListener(this::logBtnActionPerformed);
         jPanel1.add(logBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, -1));
 
-        signBtn.setBackground(new java.awt.Color(204, 255, 204));
+        signBtn.setBackground(new java.awt.Color(153, 255, 102));
         signBtn.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         signBtn.setForeground(new java.awt.Color(0, 51, 0));
         signBtn.setText("Register Now!");
@@ -194,10 +194,12 @@ public class HomePage extends javax.swing.JFrame {
         borrowedBooksBtn.setText("Borrowed Books");
         borrowedBooksBtn.addActionListener(this::borrowedBooksBtnActionPerformed);
         jPanel1.add(borrowedBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 350, 400));
 
         cvsuLogo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu.png")); // NOI18N
         jPanel1.add(cvsuLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\librarybooks.png")); // NOI18N
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
@@ -349,6 +351,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -360,7 +363,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton logBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton logsBtn;
