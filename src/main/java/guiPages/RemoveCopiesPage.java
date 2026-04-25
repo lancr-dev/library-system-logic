@@ -1,24 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Admin
- */
+
 public class RemoveCopiesPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RemoveCopiesPage.class.getName());
 
-    /**
-     * Creates new form RemoveBookPage
-     */
     public RemoveCopiesPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -38,7 +29,7 @@ public class RemoveCopiesPage extends javax.swing.JFrame {
         removeBookBtn = new javax.swing.JButton();
         quantityField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -82,12 +73,12 @@ public class RemoveCopiesPage extends javax.swing.JFrame {
         jLabel7.setText("Quantity:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 245, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 102));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 0));
-        jButton1.setText("Back");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 16, -1, -1));
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel1.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 16, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,26 +99,23 @@ public class RemoveCopiesPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void removeBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookBtnActionPerformed
-        // TODO add your handling code here:
-        // Get input values
+        // create a variable for code and quantity text field
         String code = codeField.getText().trim();
         String quantityText = quantityField.getText().trim();
-        int quantity;
+        int quantity; // create quantity variable 
         
-        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to remove the copies of the book?",
-            "Confirmation",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-
+        // send a confirmation remove copies
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to remove the copies of the book?", "Confirmation", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        // if user select yes 
         if (userChoice == javax.swing.JOptionPane.YES_OPTION){
-            // Basic validation
+            // if code or quantity is empty > send message
             if (code.isEmpty() || quantityText.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "All fields are required.");
                 return;
             }
-
+            
+            // convert quantity text field to integer and make an integer validation
             try {
                 quantity = Integer.parseInt(quantityText);
             } catch (NumberFormatException e) {
@@ -135,31 +123,32 @@ public class RemoveCopiesPage extends javax.swing.JFrame {
                 return;
             }
 
-            // Ensure books are loaded
+            // ensure the books are loaded
             BookDatabase.loadBooks();
 
-            // Perform removal
+            // create a boolean variable to perform removeCopies() method from the BookDatabase
             boolean success = BookDatabase.removeCopies(code, quantity);
-
+            
+            // if success > send success message
             if (success) {
-                JOptionPane.showMessageDialog(this, "Book/s removed successfully.");
-            } else {
-                JOptionPane.showMessageDialog(this, 
-                    "Failed to remove copies.\nCheck code or available quantity.");
+                JOptionPane.showMessageDialog(this, "Book copies removed successfully.");
+            } else { // else > send error message
+                JOptionPane.showMessageDialog(this, "Failed to remove copies.\nCheck code or available quantity."); 
             }
-
+            
+            // then navigate to BookManagementPage
             BookManagementPage page = new BookManagementPage();
             page.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_removeBookBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // back button > navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,8 +176,8 @@ public class RemoveCopiesPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JTextField codeField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

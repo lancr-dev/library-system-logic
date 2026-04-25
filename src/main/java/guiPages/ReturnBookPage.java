@@ -1,24 +1,17 @@
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
-import javax.swing.JOptionPane;
 import systemData.UserBorrowedBooksDatabase;
 
-/**
- *
- * @author Admin
- */
 public class ReturnBookPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReturnBookPage.class.getName());
 
-    /**
-     * Creates new form ReturnBookPage
-     */
     public ReturnBookPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
         
     }
 
@@ -132,15 +125,13 @@ public class ReturnBookPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to return the selected books?",
-            "Return Book Confirmation",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-
+        // send a confirmation yes or no option
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to return the selected books?", "Return Book Confirmation", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        // if user select yes
         if (userChoice == javax.swing.JOptionPane.YES_OPTION) {
-
+            
+            // Create an array of codes then get and store the book codes from the text fields 
             String[] codes = {
                 codeField1.getText().trim(),
                 codeField2.getText().trim(),
@@ -148,25 +139,27 @@ public class ReturnBookPage extends javax.swing.JFrame {
                 codeField4.getText().trim(),
                 codeField5.getText().trim()
             };
-
+            
+            // create returned and totalEntered variable to track 
             int returned = 0;
             int totalEntered = 0;
 
-            // TEMP STORAGE (for atomic operation)
+            // temporary storage using ArrayList
             java.util.ArrayList<UserBorrowedBooksDatabase> recordsToReturn = new java.util.ArrayList<>();
 
-            // =========================
-            // PHASE 1: VALIDATION ONLY
-            // =========================
+            // Validations
+            // loop through codes
             for (String code : codes) {
-
+                // if code is empty continue
                 if (code.isEmpty()) continue;
-
+                
+                // this will increment the total entered by the user
                 totalEntered++;
-
+                
+                // create variable and set to null | we will use it later
                 UserBorrowedBooksDatabase recordToRemove = null;
 
-                // Check if user actually borrowed this book
+                // Check if user actually borrowed the book that they will return
                 for (UserBorrowedBooksDatabase record : SessionData.borrowedBooks) {
                     if (record.username.equals(SessionData.currentUser)
                             && record.code.equalsIgnoreCase(code)) {
@@ -176,49 +169,40 @@ public class ReturnBookPage extends javax.swing.JFrame {
                     }
                 }
 
-                // If invalid → STOP EVERYTHING
+                // if invalid > prevent the user from returning
                 if (recordToRemove == null) {
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "You can only return books that you have borrowed.\nPlease double check the book codes.",
-                            "Invalid Book Code",
-                            javax.swing.JOptionPane.WARNING_MESSAGE
-                    );
+                    javax.swing.JOptionPane.showMessageDialog(this, "You can only return books that you have borrowed.\nPlease double check the book codes.", "Invalid Book Code", javax.swing.JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-
-                // Store valid record for execution phase
+                
+                // set the records to return to null
                 recordsToReturn.add(recordToRemove);
             }
 
-            // IF NO USER INPUT
+            // if there is no user input
             if (totalEntered == 0) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Please enter at least one book code.",
-                        "Returning Book Failed",
-                        javax.swing.JOptionPane.ERROR_MESSAGE
-                );
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter at least one book code.", "Returning Book Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // =========================
-            // PHASE 2: EXECUTION
-            // =========================
+            // loop through the borrowed books to return
             for (UserBorrowedBooksDatabase record : recordsToReturn) {
 
                 for (BookDatabase.Book b : BookDatabase.books) {
                     if (b.code.equalsIgnoreCase(record.code)) {
 
-                        b.copies++;
+                        b.copies++; // increment the copies again
 
-                        LogsDatabase.addLog(
-                                SessionData.currentUser,
-                                "RETURN",
-                                b.title
-                        );
+                        // calculate the time of return
+                        java.time.LocalDateTime now = java.time.LocalDateTime.now(); // get the current data and time
 
-                        returned++;
+                        long hoursBetween = java.time.Duration.between(record.borrowDate, now).toMinutes(); // this should be toHours (just for testing and debugging)
+                        boolean isLate = hoursBetween > 1; // hours difference
+
+                        // log with penalty to the LogsDatabase using addLog() method
+                        LogsDatabase.addLog(SessionData.currentUser, "RETURN", b.title, isLate);
+
+                        returned++; // increment the number of returned
                         break;
                     }
                 }
@@ -227,21 +211,17 @@ public class ReturnBookPage extends javax.swing.JFrame {
                 SessionData.borrowedBooks.remove(record);
             }
 
-            // SUCCESS MESSAGE
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Returned: " + returned,
-                    "Success",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE
-            );
-
+            // send success message
+            javax.swing.JOptionPane.showMessageDialog(this, "Returned: " + returned, "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            // navigate to HomePage
             new HomePage().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();

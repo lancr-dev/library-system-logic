@@ -1,24 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.LogsDatabase;
-/**
- *
- * @author Admin
- */
+
 public class LogsPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LogsPage.class.getName());
 
-    /**
-     * Creates new form LogsPage
-     */
     public LogsPage() {
         initComponents();
-        loadLogs();
-        setLocationRelativeTo(null);
+        loadLogs(); // load logs using jTable
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -137,16 +128,17 @@ public class LogsPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void registeredStudentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registeredStudentsBtnActionPerformed
-        // TODO add your handling code here:
+        // registered button page > navigate to RegisteredPage
         RegisteredPage page = new RegisteredPage();
         page.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_registeredStudentsBtnActionPerformed
 
     /**
@@ -194,45 +186,60 @@ public class LogsPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadLogs() {
-        // DEFINE TABLE COLUMNS
-        String[] columns = {
-            "USERNAME",
-            "ACTION",
-            "BOOK",
-            "DATE"
-        };
-
-        // CREATE DATA CONTAINER | Rows = number of logs | Columns = 4
-        Object[][] data =
-                new Object[LogsDatabase.logs.size()][4];
-
-        // LOOP THROUGH LOGS
+        // define the column headers using an array
+        String[] columns = {"USERNAME", "ACTION", "BOOK", "DATE"};
+        
+        // create table data using 2d array | rows = number of logs and columns = 4 headers
+        Object[][] data = new Object[LogsDatabase.logs.size()][4];
+        
+        // loop through the logs to get user username, actions, bookTitles, and date/time from LogsDatabase.Log
         for (int i = 0; i < LogsDatabase.logs.size(); i++) {
+            LogsDatabase.Log log = LogsDatabase.logs.get(i);
 
-            // Get each log object 
-            LogsDatabase.Log log =
-                    LogsDatabase.logs.get(i);
-
-            // Populate row data
             data[i][0] = log.username;
             data[i][1] = log.action;
             data[i][2] = log.bookTitle;
             data[i][3] = log.date;
         }
 
-        // CREATE NON-EDITABLE TABLE MODEL
-        javax.swing.table.DefaultTableModel model =
-                new javax.swing.table.DefaultTableModel(
-                        data,
-                        columns
-                ) {
-                    @Override
+        javax.swing.table.DefaultTableModel model = 
+                new javax.swing.table.DefaultTableModel(data, columns) {
+                    @Override // exists in DefaultTableModel 
                     public boolean isCellEditable(int row, int column) {
-                        return false; // disable editing
+                        return false; // make the cell not editable
                     }
                 };
 
-        // SET MODEL TO TABLE
+        // set the table model of the variable name of the table
         logsTable.setModel(model);
+
+        // apply the late penalty return
+        logsTable.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
+            @Override // exists in DefaultTableModel
+            public java.awt.Component getTableCellRendererComponent(
+                    javax.swing.JTable table,
+                    Object value,
+                    boolean isSelected,
+                    boolean hasFocus,
+                    int row,
+                    int column) {
+
+                java.awt.Component c = super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+
+                LogsDatabase.Log log = LogsDatabase.logs.get(row);
+                
+                // if user returns the book late > cell color will be red
+                if (log.isLate) {
+                    c.setBackground(new java.awt.Color(153, 0, 0));
+                    c.setForeground(java.awt.Color.WHITE);
+                } else { // else leave it as default color
+                    c.setBackground(java.awt.Color.WHITE);
+                    c.setForeground(new java.awt.Color(0, 51, 0));
+                }
+
+                return c;
+            }
+        });
     }
 }

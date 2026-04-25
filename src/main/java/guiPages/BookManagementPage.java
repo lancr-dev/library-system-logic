@@ -1,26 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Admin
- */
 public class BookManagementPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BookManagementPage.class.getName());
 
-    /**
-     * Creates new form BookManagementPage
-     */
     public BookManagementPage() {
         initComponents();
-        loadBookManagementTable();
-        setLocationRelativeTo(null);
+        loadBookManagementTable(); // this will load book management table
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -155,35 +145,35 @@ public class BookManagementPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void removeBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookBtnActionPerformed
-        // TODO add your handling code here:
+        // remove copies button > navigate to RemoveCopiesPage
         RemoveCopiesPage page = new RemoveCopiesPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeBookBtnActionPerformed
 
     private void addNewBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBookBtnActionPerformed
-        // TODO add your handling code here:
+        // add new book button > navigate to AddNewBookPage
         AddNewBookPage page = new AddNewBookPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addNewBookBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void addBookQuantityBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookQuantityBtnActionPerformed
-        // TODO add your handling code here:
+        // add copies button > navigate to AddCopiesPage
         AddCopiesPage page = new AddCopiesPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBookQuantityBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // remove book button > navigate to RemoveBookPage
         RemoveBookPage page = new RemoveBookPage();
         page.setVisible(true);
         this.dispose();
@@ -235,18 +225,13 @@ public class BookManagementPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadBookManagementTable() {
-        // Load books (prevent empty table)
+        // load books from the BookDatabase
         BookDatabase.loadBooks();
 
-        // Column headers
-        String[] columns = {
-            "TITLE",
-            "AUTHOR",
-            "CODE",
-            "COPIES"
-        };
+        // define column headers
+        String[] columns = {"TITLE", "AUTHOR", "CODE", "COPIES"};
 
-        // Create NON-EDITABLE model
+        // make the table not editable
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -254,18 +239,13 @@ public class BookManagementPage extends javax.swing.JFrame {
             }
         };
 
-        // Populate rows
+        // loop books through BookDatabase using object array to create rows
         for (BookDatabase.Book book : BookDatabase.books) {
-            Object[] row = {
-                book.title,
-                book.author,
-                book.code,
-                (book.copies == 0) ? "OUT OF STOCK" : book.copies
-            };
+            Object[] row = {book.title, book.author, book.code, (book.copies == 0) ? "OUT OF STOCK" : book.copies};
             model.addRow(row);
         }
 
-        // Attach to JTable
+        // set the model to the variable name of table
         bookManagementTable.setModel(model);
     }
 }

@@ -1,4 +1,4 @@
-// IMPORT NECESSARY PACKAGES
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
@@ -8,12 +8,11 @@ public class LibraryPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LibraryPage.class.getName());
 
-    // LOAD BOOK DATABASE AND TABLE
     public LibraryPage() {
         initComponents();
-        BookDatabase.loadBooks();
-        loadTable();
-        setLocationRelativeTo(null);
+        BookDatabase.loadBooks(); // load books from BookDatabase using loadBooks() method
+        loadTable(); // load books in table using loadTable() method
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -133,58 +132,55 @@ public class LibraryPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutBtnActionPerformed
-        SessionData.selectedBooks.clear(); // Clear previous session | Prevents old selections from staying | Ensures fresh checkout
+        SessionData.selectedBooks.clear(); // clear previous session | prevents old selections from staying | ensures fresh checkout
         
-        // Get table model from the varible name of jTable
+        // get table model from the varible name of jTable
         javax.swing.table.TableModel model = bookTable.getModel();
-        int count = 0; // Tracks how many books selected 
+        int count = 0; // tracks how many books will be checked by the user
         
-        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Proceed to checkout?",
-            "Confirmation",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-
+        // send a confirmation button before checking out
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(this, "Proceed to checkout?", "Confirmation", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        // if user select yes then run this code
         if (userChoice == javax.swing.JOptionPane.YES_OPTION){
             // Loop through all rows | You check every row in the table.
             for (int i = 0; i < model.getRowCount(); i++) {
 
-                Boolean selected = (Boolean) model.getValueAt(i, 4); // last column checkbox | will check if checkbox is selected
-                if (selected != null && selected) { // Only proceed if user checked it
+                Boolean selected = (Boolean) model.getValueAt(i, 4); // last column checkboxes | will check if checkboxes are being checked
+                if (selected != null && selected) { // Only proceed if user checked the checkboxes
 
                     // Prevent selecting out-of-stock
                     Object copiesObj = model.getValueAt(i, 3);
-                    if (copiesObj.toString().equals("OUT OF STOCK")) { // Extra safety check
+                    if (copiesObj.toString().equals("OUT OF STOCK")) {
                         JOptionPane.showMessageDialog(this, "Book out of stock.", "No book was found", javax.swing.JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
-                    // User can only borrow max 3 books | so if they selected more than 3 > error message
-                    count++;
+                    // User can only borrow up to 5 books at a time | so if they selected more than 5 > send warning message
+                    count++; // this will track how many books are being checked
                     if (count > 5) {
                         JOptionPane.showMessageDialog(this, "Only up to 5 books allowed at a time.", "Limitation", javax.swing.JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
-                    // Get book code to identify the book
+                    // Get the book code to identify the book
                     String code = model.getValueAt(i, 2).toString();
-                    SessionData.selectedBooks.add(code);
+                    SessionData.selectedBooks.add(code); // then store the selected books to SessionData.selectedBooks() method
                 }
             }
 
-            // If nothing selected > Prevent empty checkout
+            // If there is no checked books > Prevent empty checkout > send error message
             if (count == 0) {
                 JOptionPane.showMessageDialog(this, "No book/s selected.\nSelect at least 1.", "No book was found", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Clear or reset checkboxes after checkout
+            // Clear checkboxes after checkout
             for (int i = 0; i < model.getRowCount(); i++) {
                 model.setValueAt(false, i, 4);
             }
 
-            // Navigate to CheckoutPage
+            // then navigate to CheckoutPage
             CheckoutPage page = new CheckoutPage();
             page.setVisible(true);
             this.dispose();
@@ -192,7 +188,7 @@ public class LibraryPage extends javax.swing.JFrame {
     }//GEN-LAST:event_checkoutBtnActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
@@ -243,55 +239,51 @@ public class LibraryPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadTable() {
-        // DEFINE THE TABLE COLUMNS/HEADERS
-        String[] columns = {
-            "TITLE",
-            "AUTHOR",
-            "CODE",
-            "COPIES",
-            "SELECT"   // checkbox at the end
-        };
+        // define the table columns headers using array
+        String[] columns = {"TITLE", "AUTHOR", "CODE", "COPIES", "SELECT"};
         
-        // CREATE TABLE DATA CONTAINER | Rows = number of books and Columns = 5
+        // create table data using 2d array | rows = number of books and columns = 5 headers
         Object[][] data = new Object[BookDatabase.books.size()][5];
         
-        // LOOP THROUGH BOOKS | WE WILL GET EACH BOOK FROM BOOK DATABASE | b represents one book
+        // loop through books | we will get each book from the BookDatabase | b represents one book
         for (int i = 0; i < BookDatabase.books.size(); i++) {
             BookDatabase.Book b = BookDatabase.books.get(i);
             
-            // FILL COLUMNS
+            // fill the column rows
             data[i][0] = b.title;
             data[i][1] = b.author;
             data[i][2] = b.code;
             
-            // HANDLE STOCK LOGIC | IF NO COPIES THEN WILL SHOW OUT OF STOCK AND THE CHECKBOX WILL BE DISABLED
+            // handle stock | if no copies then we will display OUT OF STOCK and the checkbox will be disabled
             if (b.copies == 0) {
                 data[i][3] = "OUT OF STOCK";
-                data[i][4] = null; // checkbox disabled
+                data[i][4] = null; // checkbox will be disabled
             } else {
                 data[i][3] = b.copies;
-                data[i][4] = false; // checkbox unchecked
+                data[i][4] = false; // checkbox will be unchecked
             }
         }
 
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(data, columns) {
-            @Override // COLUMN 4 BECOMES A CHECKBOX COLUMN
+            @Override // exists in DefaultTableModel 
+            // column index 4 will be the checkboxes
             public Class getColumnClass(int column) {
-                if (column == 4) return Boolean.class; // last column is checkbox
+                if (column == 4) return Boolean.class;
                 return String.class;
             }
 
-            @Override // CHECKBOX CONTROL 
+            @Override // exists in DefaultTableModel 
             public boolean isCellEditable(int row, int column) {
                 if (column != 4) return false; // Only checkbox column is editable
                 Object value = getValueAt(row, 3); // Prevent selecting out-of-stock
+                
                 // If out of stock > cannot click checkbox and we will show OUT OF STOCK
                 if (value == null) return false;
-                if (value.toString().equals("OUT OF STOCK")) return false; // cannot select out-of-stock
-                return true; // Otherwise > checkbox is clickable
+                if (value.toString().equals("OUT OF STOCK")) return false; // cannot select OUT OF STOCK
+                return true; // otherwise > checkbox is clickable if not OUTO OF STOCK
             }
         };
-        // APPLY MODEL TO TABLE
+        // apply model to variable name of the table
         bookTable.setModel(model);
     }
 }

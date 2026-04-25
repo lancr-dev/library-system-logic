@@ -1,28 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
-
 import systemData.SessionData;
 import systemData.UserBorrowedBooksDatabase;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Admin
- */
 public class UserBorrowedBooksPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UserBorrowedBooksPage.class.getName());
 
-    /**
-     * Creates new form UserBorrowedBooksPage
-     */
     public UserBorrowedBooksPage() {
         initComponents();
-        loadBorrowedBooksTable();
-        setLocationRelativeTo(null);
+        loadBorrowedBooksTable(); // load the borrowed books into table
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -127,14 +116,14 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
-        // TODO add your handling code here:
+        // return book button > navigate to ReturnBookPage
         ReturnBookPage page = new ReturnBookPage();
         page.setVisible(true);
         this.dispose();
@@ -182,24 +171,24 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadBorrowedBooksTable() {
-        // Define table columns
+        // Define table columns headers
         String[] columns = {"TITLE", "CODE"};
 
-        // Create NON-EDITABLE table model
+        // create non editable table model
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
-            @Override
+            @Override // the default behavior of isCellEditable() | exists in DefaultTableModel
             public boolean isCellEditable(int row, int column) {
-                return false; // prevent editing for all cells
+                return false; // prevents all cells in the table to not editable
             }
         };
 
-        // Loop through all borrowed records
+        // Loop through all borrowed records to get the borrowed books
         for (UserBorrowedBooksDatabase record : SessionData.borrowedBooks) {
 
-            // Only show books for current logged-in user
+            // Only show the books for current logged-in user
             if (record.username.equals(SessionData.currentUser)) {
 
-                Object[] row = {
+                Object[] row = { // display the book title and code in table rows
                     record.title,
                     record.code
                 };
@@ -208,7 +197,7 @@ public class UserBorrowedBooksPage extends javax.swing.JFrame {
             }
         }
 
-        // Set model to JTable
+        // set model to the variable name of the table
         borrowedBooksTable.setModel(model);
     }
 }

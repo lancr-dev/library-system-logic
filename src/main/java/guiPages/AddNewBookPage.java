@@ -1,25 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
 public class AddNewBookPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddNewBookPage.class.getName());
 
-    /**
-     * Creates new form AddNewBookPage
-     */
     public AddNewBookPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -43,7 +33,7 @@ public class AddNewBookPage extends javax.swing.JFrame {
         copiesField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         submitNewBookBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -102,12 +92,12 @@ public class AddNewBookPage extends javax.swing.JFrame {
         submitNewBookBtn.addActionListener(this::submitNewBookBtnActionPerformed);
         jPanel1.add(submitNewBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 260, -1));
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 102));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 0));
-        jButton1.setText("Back");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel1.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,60 +113,61 @@ public class AddNewBookPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitNewBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitNewBookBtnActionPerformed
-        // TODO add your handling code here:
-        // Get input values
+        // create variable to get value from the text fields
         String title = titleField.getText().trim();
         String author = authorField.getText().trim();
         String code = codeField.getText().trim();
         String copiesText = copiesField.getText().trim();
 
-        // Validate empty fields
+        // Validations
+        // if title or author or code or copies is empty > send message
         if (title.isEmpty() || author.isEmpty() || code.isEmpty() || copiesText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "All fields are required.");
             return;
         }
-
+        
+        // create variable for copies
         int copies;
 
-        // Validate number input
         try {
-            copies = Integer.parseInt(copiesText);
+            copies = Integer.parseInt(copiesText); // convert copies text into integer
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Copies must be a number.");
+            JOptionPane.showMessageDialog(this, "Copies must be a number."); // if admin did not type a number > send message
             return;
         }
 
-        // Ensure books are loaded
+        // ensure books are loaded
         BookDatabase.loadBooks();
 
-        // Call add method
+        // create boolean variable to tracks if the user entered the right values
         boolean success = BookDatabase.addBook(title, author, code, copies);
-
-        if (success) {
+        
+        // if success > send success message
+        if (success) { 
             JOptionPane.showMessageDialog(this, "Book added successfully.");
 
-            // Optional: clear fields
+            // optional: clear fields after success
             titleField.setText("");
             authorField.setText("");
             codeField.setText("");
             copiesField.setText("");
 
         } else {
-            JOptionPane.showMessageDialog(this, 
-                "Failed to add book.\nCheck inputs or duplicate code.");
+            JOptionPane.showMessageDialog(this, "Failed to add book.\nCheck inputs or duplicate code."); // else send message
         }
         
+        // then navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_submitNewBookBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // back button > navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,9 +196,9 @@ public class AddNewBookPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField authorField;
+    private javax.swing.JButton backBtn;
     private javax.swing.JTextField codeField;
     private javax.swing.JTextField copiesField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

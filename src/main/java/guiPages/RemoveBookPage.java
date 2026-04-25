@@ -1,23 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.BookDatabase;
-/**
- *
- * @author Admin
- */
+
 public class RemoveBookPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RemoveBookPage.class.getName());
 
-    /**
-     * Creates new form RemoveBookPage
-     */
     public RemoveBookPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -97,59 +88,43 @@ public class RemoveBookPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void removeSpecificBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSpecificBookBtnActionPerformed
-        // TODO add your handling code here:
+        // create a variable for code text field
         String code = codeField.getText().trim();
 
-        // Validation
+        // if code is empty > send warning message
         if (code.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Please enter a book code.",
-                "Input Error",
-                javax.swing.JOptionPane.WARNING_MESSAGE
-            );
+            javax.swing.JOptionPane.showMessageDialog(this,  "Please enter a book code.", "Input Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Confirm deletion (important UX)
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to remove this book?",
-            "Confirm Removal",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-
+        // send a confirm deletion before actually deleted
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this book?", "Confirm Removal", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        // if admin select no > prevent from deleting
         if (confirm != javax.swing.JOptionPane.YES_OPTION) {
             return;
         }
 
-        // Remove from database
+        // create a boolean variable that will call the removeBook() method in BookDatabase
         boolean success = BookDatabase.removeBook(code);
-
+        
+        // if book not found or not success > send error message
         if (!success) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Book not found.",
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE
-            );
+            javax.swing.JOptionPane.showMessageDialog(this, "Book not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Book removed successfully.",
-            "Success",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE
-        );
-
+        
+        // otherwise > send success message
+        javax.swing.JOptionPane.showMessageDialog(this, "Book removed successfully.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+        // then navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeSpecificBookBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();

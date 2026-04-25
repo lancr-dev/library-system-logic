@@ -1,36 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// import packages
 package systemData;
+import java.time.LocalDateTime;
 
-/**
- *
- * @author Admin
- */
+// create UserBorrowedBooksDatabase
 public class UserBorrowedBooksDatabase {
-    // STORES the username of the person who borrowed the book
+    // create variables for username, title, code, and borrow date
     public String username;
-
-    // STORES the title of the borrowed book
     public String title;
-
-    // STORES the unique code of the borrowed book
     public String code;
-
-    /**
-     * CONSTRUCTOR
-     * 
-     * This runs whenever a new BorrowRecord object is created.
-     * It initializes all the required fields.
-     * 
-     * @param username - the current logged-in user
-     * @param title    - the title of the book
-     * @param code     - the unique book code
-     */
-    public UserBorrowedBooksDatabase(String username, String title, String code) {
+    public LocalDateTime borrowDate;
+    
+    // create a new object with username, title, code, and borrow date | runs when user checkout book
+    public UserBorrowedBooksDatabase(String username, String title, String code, LocalDateTime date) {
         this.username = username;
         this.title = title;
         this.code = code;
+        borrowDate = date;
     }
 }

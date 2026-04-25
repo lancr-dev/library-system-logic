@@ -1,44 +1,53 @@
+// import packages
 package systemData;
-
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-// ACTIVITY HISTORY STORAGE
+// create LogsDatabase
 public class LogsDatabase {
-
+    
+    // create Log model
     public static class Log {
-        // DATA MODEL / VARIABLES
+        // create variables for username, action, book title, date, and isLate
         public String username;
         public String action;
         public String bookTitle;
         public String date;
+        public boolean isLate; 
         
-        // THIS RUNS WHEN A NEW LOG IS CREATED
-        public Log(String u, String a, String b, String d) {
+        // create a new Log object with username, action, book title, date, and isLate | runs whenever a new Log object is created
+        public Log(String u, String a, String b, String d, boolean late) {
             username = u;
             action = a;
             bookTitle = b;
             date = d;
+            isLate = late;
         }
     }
     
-    // ARRAY | WHERE TO STORE LOGS DATA
+   // create an array list for Logs as temporary database
     public static ArrayList<Log> logs = new ArrayList<>();
 
-    // THIS IS THE METHOD TO ADD NEW LOG
-    public static void addLog(String user, String action, String book) {
+    // create addLog() method to add new log
+    public static void addLog(String user, String action, String book, boolean isLate) {
         
-        // GET CURRENT DATE AND FORMAT THE DATE
+        // this will get current date 
         LocalDateTime now = LocalDateTime.now();
-
+        
+        // this will format the date to make it readable
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 
         String date = now.format(formatter);
         
-        // CREATE NEW LOG AND STORE TO LOG ARRAY LIST
-        logs.add(new Log(user, action, book, date));
+        // this will create new log
+        logs.add(new Log(user, action, book, date, isLate));
+    }
+    
+    // this addLog() method will add new log to store in array list
+    public static void addLog(String user, String action, String book) {
+        addLog(user, action, book, false); // default: not late
     }
 
 }

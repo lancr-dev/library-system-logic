@@ -1,4 +1,4 @@
-// IMPORT PACKAGES
+// import packages
 package guiPages;
 import systemData.FormDatabase;
 import systemData.SessionData;
@@ -10,10 +10,9 @@ public class FormPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormPage.class.getName());
     
-    // JAVA CONSTRUCTOR
     public FormPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     @SuppressWarnings("unchecked")
@@ -92,33 +91,33 @@ public class FormPage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 51));
         jLabel6.setText("Reminder/Take Note:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 408, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("- Return the book you borrowed whitin 2 days.");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 432, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("- Late book returns will have a P20 penalty.");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 453, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("- Handle books with care. Avoid scratches, folds, or damage.");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 474, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, -1));
 
         agreeCheckBox.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         agreeCheckBox.setForeground(new java.awt.Color(255, 255, 255));
         agreeCheckBox.setText("I Agree to the Library Rules and Conditions.");
         agreeCheckBox.addActionListener(this::agreeCheckBoxActionPerformed);
-        jPanel1.add(agreeCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 528, -1, -1));
+        jPanel1.add(agreeCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("- Damaging the book will require payment based on its value.");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 495, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,83 +138,76 @@ public class FormPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        // CREATE VARIABLES TO GET DATA, STUDENT ID, AND COURSE FROM THE TEXT FIELDS
+        // create variables for date, id, and course to accept text fields
         String date = dateField.getText().trim();
         String idText = idField.getText().trim();
         String course = courseField.getSelectedItem().toString();
         
-        // VALIDATIONS
-        // IF DATA IS EMPTY OR ID IS EMPTY OR COURSE IS EMPTY > ERROR MESSAGE
+        // if date or id or course is empty > send warning message
         if (date.isEmpty() || idText.isEmpty() || course.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "All fields are required!", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-        // IF USER TYPED DATA THAT IS NOT MATCHES TO GIVEN FORMAT > ERROR MESSAGE || THIS IS A REGEX METHOD
+        
+        // if user did not type the date on the givern format > send warning message
         if (!date.matches("\\d+/\\d+/\\d+")) {
 
             JOptionPane.showMessageDialog(this, "Date Format: MM/DD/YYYY", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         LocalDate today = LocalDate.now();
-
-        String currentDate =
-                today.getMonthValue() + "/"
-                + today.getDayOfMonth() + "/"
-                + today.getYear();
+        
+        // create current date variable to get the current date
+        String currentDate = today.getMonthValue() + "/" + today.getDayOfMonth() + "/" + today.getYear();
+        
+        // if date is not equal to current date > send warning message
         if (!date.equals(currentDate)) {
 
             JOptionPane.showMessageDialog(this, "Date must be today: " + currentDate, "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        // CREATE VARIABLE INT ID
+        // create variable for id integer
         int id;
         
-        if(idText.length() != 9 || idText.length() > 9){
+        // if id text length is not equal to 9 or greater than 9 > send warning message
+        if(idText.length() != 9){
             JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        // if course is not selected (index = 0) > send warning message
         if(courseField.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(this, "Please select your course.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        // TRY / CATCH METHOD
+        // use try catch method and convert id text to integer
         try {
-            // ID WILL GET AND STORE TO idText
             id = Integer.parseInt(idText);
-
-        } catch (Exception e) {
-            // IF USER DO NOT TYPE INTEGER IN STUDENT ID > ERROR MESSAGE
+        } catch (NumberFormatException e) {
+            // if user did not type a number in id text field > send warning message
             JOptionPane.showMessageDialog(this, "Invalid ID format.", "Submission failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        // if user did not check the checkbox for rules and conditions > send message
         if(!agreeCheckBox.isSelected()){
             JOptionPane.showMessageDialog(this, "You must agree to the Library \nRules and Conditions. ", "Terms and Conditions.", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
-        // AFTER THE USER CLICK SUBMIT BUTTON, WE WILL CALL/USE addForm() METHOD TO STORE FORM PAGE DATA TO FORM DATABASE
-        FormDatabase.addForm(
-                date,
-                id,
-                course
-        );
+        // after the user clicked submit button will call and use addForm method from from the FormDatabase to store the data
+        FormDatabase.addForm(date, id, course);
         
-        // THEN LOGS THE USER AND ACTION AS "FORM"
-        LogsDatabase.addLog(
-                SessionData.currentUser,
-                "FORM",
-                "-"
-        );
+        // then logs the user to the LogsDatabase and set action to "FORM"
+        LogsDatabase.addLog(SessionData.currentUser, "FORM", "-");
         
-        // SHOW SUCCESS MESSAGE
+        // send success message
         javax.swing.JOptionPane.showMessageDialog(this, "Form submitted successfully.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         
-        // NAVIGATE TO HOME PAGE
+        // then navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();

@@ -1,3 +1,4 @@
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
@@ -5,22 +6,15 @@ import systemData.LogsDatabase;
 import javax.swing.JOptionPane;
 import systemData.UserBorrowedBooksDatabase;
 
-/**
- *
- * @author Admin
- */
 public class CheckoutPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CheckoutPage.class.getName());
 
-    /**
-     * Creates new form CheckoutPage
-     */
     public CheckoutPage() {
         initComponents();
-        loadSelectedBooks();
-        setLocationRelativeTo(null);
-        checkoutTable.setEnabled(false);
+        loadSelectedBooks(); // load checked books from the LibraryPage and display it to the table
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
+        checkoutTable.setEnabled(false); // prevents tha the table to edit
     }
 
     /**
@@ -138,18 +132,14 @@ public class CheckoutPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Confirm selected books?",
-            "Checkout Confirmation",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(this, "Confirm selected books?", "Checkout Confirmation", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        // if user select yes option
         if (userChoice == javax.swing.JOptionPane.YES_OPTION) {
-            // STORE TO LOGS THAT THE USER HAD CHECKOUT ACTION
+            // create a variable to track who is the user
             String user = SessionData.currentUser;
 
-            // PROCESS EACH SELECTED BOOK
+            // process each selected books
             for (String code : SessionData.selectedBooks) {
 
                 // Find book by code
@@ -157,50 +147,40 @@ public class CheckoutPage extends javax.swing.JFrame {
 
                     if (b.code.equals(code)) {
 
-                        // CHECK STOCK (extra safety)
+                        // check if there still a stock (extra safety)
                         if (b.copies <= 0) {
-                            javax.swing.JOptionPane.showMessageDialog(
-                                    this,
-                                    "Book out of stock: " + b.title
-                            );
+                            javax.swing.JOptionPane.showMessageDialog(this, "Book out of stock: " + b.title);
                             return;
                         }
 
-                        // DECREASE ONLY HERE (FINAL FIX)
+                        // decrease the copies
                         b.copies--;
 
-                        // SAVE BORROW RECORD (NEW - SAFE ADDITION)
-                        SessionData.borrowedBooks.add(new UserBorrowedBooksDatabase(
-                                        user,
-                                        b.title,
-                                        b.code
-                                )
-                        );
+                        // save and store the borrowed book title, code, and date and time of a specific user to UserBorrowedBooksDatabase 
+                        SessionData.borrowedBooks.add(new UserBorrowedBooksDatabase(user, b.title, b.code, java.time.LocalDateTime.now()));
 
-                        // LOG
-                        LogsDatabase.addLog(
-                                user,
-                                "CHECKOUT",
-                                b.title
-                        );
-
+                        // logs the user action to LogsDatabase using addLog() method
+                        LogsDatabase.addLog(user, "CHECKOUT", b.title);
                         break;
                     }
                 }
             }
 
-            // Clear session AFTER processing
+            // clear session after processing
             SessionData.selectedBooks.clear();
-
+            
+            // send success message
             JOptionPane.showMessageDialog(this, "Checkout Confirmed.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
-            new FormPage().setVisible(true);
+            // navigate to FormPage
+            FormPage page = new FormPage();
+            page.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to LibraryPage
         LibraryPage page = new LibraryPage();
         page.setVisible(true);
         this.dispose();
@@ -250,30 +230,26 @@ public class CheckoutPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadSelectedBooks() {
-        // Define columns
-        String[] columns = {
-            "BOOK TITLE",
-            "BOOK CODE"
-        };
+        // Define columns header
+        String[] columns = {"BOOK TITLE", "BOOK CODE"};
 
         // Use DefaultTableModel (dynamic, no manual array sizing)
-        javax.swing.table.DefaultTableModel model =
-                new javax.swing.table.DefaultTableModel(columns, 0);
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columns, 0);
 
-        // Fill rows
+        // Fill the rows with the selected books of the user
         for (String code : SessionData.selectedBooks) {
 
-            String title = "Unknown";
+            String title = "Unknown"; // create variable title | this will be used to display title of the books
 
-            // Find title using code
+            // Find title using code from the BookDatabase using for loop
             for (BookDatabase.Book b : BookDatabase.books) {
                 if (b.code.equals(code)) {
                     title = b.title;
-                    break;
+                    break; // then stop if its found
                 }
             }
 
-            // Add row (Title first, then Code)
+            // Show row (Title first, then Code)
             model.addRow(new Object[]{title, code});
         }
 

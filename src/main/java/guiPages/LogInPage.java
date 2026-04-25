@@ -1,29 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-// IMPORT NECESSARY PACKAGES
+// import packages
 package guiPages;
 import systemData.UserDatabase;
 import systemData.SessionData;
 import systemData.LogsDatabase;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
 public class LogInPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LogInPage.class.getName());
 
-    /**
-     * Creates new form LogInPage
-     */
     public LogInPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -45,7 +33,7 @@ public class LogInPage extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        registerNowBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -101,12 +89,12 @@ public class LogInPage extends javax.swing.JFrame {
         jLabel5.setText("Enter your information to log in your account.");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 102));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 0));
-        jButton1.setText("Don’t have an account? Register now!");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 240, -1));
+        registerNowBtn.setBackground(new java.awt.Color(153, 255, 102));
+        registerNowBtn.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        registerNowBtn.setForeground(new java.awt.Color(0, 51, 0));
+        registerNowBtn.setText("Don’t have an account? Register now!");
+        registerNowBtn.addActionListener(this::registerNowBtnActionPerformed);
+        jPanel1.add(registerNowBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 240, -1));
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,61 +113,61 @@ public class LogInPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // CREATE VARIABLES TO GET USERNAME AND PASSWORD FROM THE TEXT FIELDS
+        // // create variables to get username and password 
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword());
         
-        // VALIDATIONS
-        // IF USERNAME IS EMPTY OR PASSWORD IS EMPTY > ERROR MESSAGE
+        // LogInPage Validations/Authentication
+        // if username and password is empty > send warning message
         if (username.isEmpty() || password.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "All fields are required", "Authentication Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        // CREATE A VARIABLE TO VALID USERNAME AND PASSWORD FROM THE USER DATABASE
+        // create a variable to valid username and password from the UserDatabase
         boolean valid = UserDatabase.validate(username, password);
-
+        
         if (valid) {
 
-            // SAVE USER SESSION TO SESSION DATA
+            // logged in user
             SessionData.currentUser = username;
 
-            // STORE THE USERNAME AND ACTION as "LOGIN" IN LOGS DATABASE
+            // store the username action to LogsDatabase addLog() method
             LogsDatabase.addLog(
                     username,
                     "LOGIN",
                     "-"
             );
             
-            // IF USERNAME AND PASSWORD IS VALID FROM THE USER DATABASE > SUCCESS MESSAGE
+            // if username and password is valid from the UserDatabase > send success message
             javax.swing.JOptionPane.showMessageDialog(this, "Log in successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
-            // NAVIGATE TO HOME PAGE
+            // navigate to HomePage
             HomePage page = new HomePage();
             page.setVisible(true);
             this.dispose();
             
         } else {
-            // IF USERNAME AND PASSWORD IS NOT VALID > ERROR MESSAGE
+            // else if username and password is not valid > send warning message
             JOptionPane.showMessageDialog(this, "Invalid username or password.", "Authentication Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
 
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void registerNowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNowBtnActionPerformed
+        // register now button > navigate to SignUpPage
         SignUpPage page = new SignUpPage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_registerNowBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +196,6 @@ public class LogInPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -220,6 +207,7 @@ public class LogInPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton registerNowBtn;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
