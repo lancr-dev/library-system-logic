@@ -1,24 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-// IMPORTS
+// import packages
 package systemData;
 import java.util.ArrayList;
 
-// CREATE PUBLIC CLASS OF USER DATABASE
+// create UserDatabase
 public class UserDatabase {
     
-    // MODEL CLASS
+    // create User model
     public static class User {
+        // create variables for username, email, password, course, and studen id
         public String username;
         public String email;
         public String password;
         public String course;
         public int studentId;
         
-        // THIS CODE RUNS WHEN CREATING A NEW USER
+        // create a new object with username, email, password, course, and studen id | runs when a new user is added or created
         public User(String u, String e, String p, String c, int id) {
             username = u;
             email = e;
@@ -28,36 +24,39 @@ public class UserDatabase {
         }
     }
     
-    // ARRAY TO STORE USERS
+    // create an array list ofr Users as temporary database
     public static ArrayList<User> users = new ArrayList<>();
 
 
-    // ADD USER
+    // create an addUser() method to add user
     public static void addUser(String u, String e, String p, String c, int id) {
         users.add(new User(u, e, p, c, id));
     }
 
 
-    // VALIDATE USER | THIS CHECKS IF USERNAME AND PASSWORD EXIST
+    // this will validate and check if username password is exist 
     public static boolean validate(String u, String p) {
-
+        
+        // loop through registered users
         for (User user : users) {
-            if (user.username.equals(u) &&
-                user.password.equals(p)) {
+            // if username is equal to username and password is equal to password > return true / proceed
+            if (user.username.equals(u) && user.password.equals(p)) {
                 return true;
             }
         }
 
-        return false;
+        return false; // otherwise return false
     }
     
-    // CREATE ACCOUNT FOR ADMINISTRATOR
+    // create default accounts by creating loadDefaultUsers() method
     public static void loadDefaultUsers() {
-
+        
+        // this will help to prevent duplicate default users from being added again
         if (!users.isEmpty()) return;
-
-        users.add(new User("Admin", "--", "1234", "--", 00000000));
-        users.add(new User("Student", "student@cvsu.edu.ph", "1234", "BSCS", 123456789));
+        
+        // add default accoun (especially admins)
+        users.add(new User("Admin", "--", "12345", "--", 00000000));
+        users.add(new User("Student", "student@cvsu.edu.ph", "12345", "BSCS", 123456789));
 
     }
 }

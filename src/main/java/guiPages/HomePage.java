@@ -1,4 +1,4 @@
-// IMPORT NECESSARY PACKAGES
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 import systemData.SessionData;
@@ -12,12 +12,12 @@ public class HomePage extends javax.swing.JFrame {
 
     public HomePage() {
         initComponents();
-        setLocationRelativeTo(null);
-        BookDatabase.loadBooks();
-        UserDatabase.loadDefaultUsers();
-        updateUIState();
+        setLocationRelativeTo(null); // set the GUI to center of the screen
+        BookDatabase.loadBooks(); // load books from BooksDatabase using loadBooks() method
+        UserDatabase.loadDefaultUsers(); // this load the default users which is (Admin account is already created)
+        updateUIState(); // this method changes the GUI interface, it depends on who is currently logged in (User or Admin)
         
-        // IF USER IS NOT LOGGED IN > SHOW LOG IN BTN | IF USER IS ALREADY LOGGED IN > HIDE LOG IN BTN
+        // if user is not logged in hide the logout button > else show logout button
         if(SessionData.currentUser == null){
             logoutBtn.setVisible(false);
         } else {
@@ -207,17 +207,17 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void returnBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookBtnActionPerformed
-        // IF USER IS NOT LOGGED IN, CANNOT RETURN BOOK > ERROR MESSAGE
+        // if user is not logged in > cannot go to ReturnBookPage > send error message
         if (SessionData.currentUser == null) {
 
             JOptionPane.showMessageDialog(null, "You must Login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
             
-            // NAVIGATE TO HOME PAGE AGAIN
+            // then navigate to LogInPage
             LogInPage page = new LogInPage();
             page.setVisible(true);
             this.dispose();
         } else {
-            // IF USER IS LOGGED IN > NAVIGATE TO RETURN BOOK PAGE
+            // but if user is logged in > navigate to ReturnBookPage
             ReturnBookPage page = new ReturnBookPage();
             page.setVisible(true);
             this.dispose();
@@ -226,91 +226,78 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_returnBookBtnActionPerformed
 
     private void logsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsBtnActionPerformed
-        // IF USER CLICKED LOGS BUTTON > NAVIGATE TO LOGS PAGE
+        // if admin clicked logs button > navigate to LogsPage
         LogsPage page = new LogsPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logsBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        int userChoice = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Do you really want to Logout?",
-            "Logout Confirmation",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
+        // if user clicked logout button > send a message confirmation 
+        int userChoice = javax.swing.JOptionPane.showConfirmDialog(this, "Do you really want to Logout?", "Logout Confirmation", javax.swing.JOptionPane.YES_NO_OPTION);
 
-        // Exit early if user selects NO
+        // if user selects "no" > prevent from logout
         if (userChoice != javax.swing.JOptionPane.YES_OPTION) {
             return;
         }
-
-        // Defensive check before logging
+        
+        // create the logout log and store it into LogsDatabase.addLog() method
         if (SessionData.currentUser != null) {
-            LogsDatabase.addLog(
-                SessionData.currentUser,
-                "LOGOUT",
-                "-"
-            );
+            LogsDatabase.addLog(SessionData.currentUser, "LOGOUT", "-");
         }
 
-        // Clear session
+        // logout the current user or clear the session
         SessionData.currentUser = null;
 
-        // Update UI state
+        // then update the GUI interface
         updateUIState();
 
-        // Notify user
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Logged out successfully.",
-            "Success",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE
-        );
+        // Send a success logout message to the user 
+        javax.swing.JOptionPane.showMessageDialog(this, "Logged out successfully.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void goLibraryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goLibraryBtnActionPerformed
-        // IF USER IS NOT LOGGED IN, CANNOT GO TO LIBRARY PAGE > ERROR MESSAGE
+        // if user is not logged in > cannot go to LibraryPage > send error message
         if (SessionData.currentUser == null) {
 
             JOptionPane.showMessageDialog(null, "You must Login first.", "No account was found.", JOptionPane.INFORMATION_MESSAGE);
 
-            // NAVIGATE TO HOME PAGE AGAIN
+            // then navigate to LogInPage
             LogInPage page = new LogInPage();
             page.setVisible(true);
             this.dispose();
             return;
         }
 
-        // IF USER IS LOGGED IN > NAVIGATE TO LIBRARY PAGE
+        // if user is logged in > navigate to LibraryPage
         LibraryPage page = new LibraryPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goLibraryBtnActionPerformed
 
     private void signBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signBtnActionPerformed
-        // IF USER CLICKED SIGN IN BUTTON > NAVIGATE TO SIGN IN PAGE
+        // if user clicked signup button > navigate to SignUpPage
         SignUpPage page = new SignUpPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_signBtnActionPerformed
 
     private void logBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logBtnActionPerformed
-        // IF USER CLICKED LOG IN BUTTON > NAVIGATE TO LOGIN PAGE
+        // if user clicked login button > navigate to LogInPage
         LogInPage page = new LogInPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logBtnActionPerformed
 
     private void manageBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageBooksBtnActionPerformed
-        // TODO add your handling code here:
+        // if admin clicked book management button > navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_manageBooksBtnActionPerformed
 
     private void borrowedBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowedBooksBtnActionPerformed
-        // TODO add your handling code here:
+        // if user clciked borrowed books button > navigate to UserBorrowedBooksPage
         UserBorrowedBooksPage page = new UserBorrowedBooksPage();
         page.setVisible(true);
         this.dispose();
@@ -374,50 +361,44 @@ public class HomePage extends javax.swing.JFrame {
 
     private void updateUIState() {
         
-        // IF USER IS NOT LOGGED IN > HIDE LOGOUT BTN, LOGS BTN, AND WELCOME LABEL
+        // This is the code for updateUIState() method
+        // if there is no user logged in...
         if (SessionData.currentUser == null) {
 
-            logoutBtn.setVisible(false);
-            logsBtn.setVisible(false);
-            manageBooksBtn.setVisible(false);
+            logoutBtn.setVisible(false);  // hide logout button
+            logsBtn.setVisible(false); // hide logs button
+            manageBooksBtn.setVisible(false); // hide book management button
+            borrowedBooksBtn.setVisible(false); // hide borrowed books button
 
-            signBtn.setVisible(true);
-            logBtn.setVisible(true);
-            
-            borrowedBooksBtn.setVisible(false);
-            returnBookBtn.setVisible(true);
-            goLibraryBtn.setVisible(true);
+            signBtn.setVisible(true);  // show signip button
+            logBtn.setVisible(true); // show login button
+            returnBookBtn.setVisible(true); // show return book button
+            goLibraryBtn.setVisible(true); // show go library button
 
-            welcomeLabel.setVisible(false);
-        // ELSE IF USER LOGGED IN > SHOW LOGOUT BTN, HIDE LOG IN AND SIGN IN BTN, SHOW WELCOME LABEL
-        } else {
+            welcomeLabel.setVisible(false); // hide welcome label
+        } else { // else if there's a user logged in...
 
-            logoutBtn.setVisible(true);
+            logoutBtn.setVisible(true); // show logout button
 
-            signBtn.setVisible(false);
-            logBtn.setVisible(false);
+            signBtn.setVisible(false); // hide signup button
+            logBtn.setVisible(false); // hide login button
 
-            welcomeLabel.setVisible(true);
+            welcomeLabel.setVisible(true); // show welcome label + username of who is currently logged inn
+            welcomeLabel.setText("Welcome " + SessionData.currentUser + "!");
 
-            welcomeLabel.setText(
-                    "Welcome " +
-                    SessionData.currentUser +
-                    "!"
-            );
-
-            // SHOW LOGS BTN ONLY IF CURRENT USER IS ADMIN | OTHERWISE HIDE LOGS BUTTON
+            // if current user is "Admin"...
             if (SessionData.currentUser.equals("Admin")) {
 
-                logsBtn.setVisible(true);
-                manageBooksBtn.setVisible(true);
-                returnBookBtn.setVisible(false);
-                goLibraryBtn.setVisible(false); 
-                borrowedBooksBtn.setVisible(false);
+                logsBtn.setVisible(true); // show logs button
+                manageBooksBtn.setVisible(true); // show book management button
+                returnBookBtn.setVisible(false); // hide return book button
+                goLibraryBtn.setVisible(false); // hide go library button
+                borrowedBooksBtn.setVisible(false); // hide borrowed books button
 
-            } else {
+            } else { // else if the current user is not "Admin"
 
-                logsBtn.setVisible(false);
-                manageBooksBtn.setVisible(false);
+                logsBtn.setVisible(false); // hide logs button
+                manageBooksBtn.setVisible(false); // hide book management button
             }
         }
     }

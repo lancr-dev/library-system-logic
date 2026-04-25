@@ -1,26 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.UserDatabase;
 
-/**
- *
- * @author Admin
- */
 public class RegisteredPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisteredPage.class.getName());
 
-    /**
-     * Creates new form RegisteredPage
-     */
     public RegisteredPage() {
         initComponents();
-        setLocationRelativeTo(null);
-        loadRegisteredTable();
-        registeredTable.setEnabled(false);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
+        loadRegisteredTable(); // load list of registered table 
+        registeredTable.setEnabled(false); // make the table not editable
     }
 
     /**
@@ -122,7 +112,9 @@ public class RegisteredPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // back button > navigate to LogsPage
+        LogsPage page = new LogsPage();
+        page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -168,23 +160,18 @@ public class RegisteredPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadRegisteredTable() {
-        // Create table model
+        // create table model
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel();
 
-        // Set column names (NO password)
+        // define column headers: names, email, course, and student id of the user (except password)
         model.setColumnIdentifiers(new String[]{"USERNAME", "EMAIL", "COURSE", "STUDENT ID"});
 
-        // Loop through users and add to table
+        // Loop through to get the data from the UserDatabase.User and add to table 
         for (UserDatabase.User user : UserDatabase.users) {
-            model.addRow(new Object[]{
-                user.username,
-                user.email,
-                user.course,
-                user.studentId
-            });
+            model.addRow(new Object[]{user.username, user.email, user.course, user.studentId});
         }
 
-        // Set model to JTable
+        // set model to table's variable name
         registeredTable.setModel(model);
     }
 }

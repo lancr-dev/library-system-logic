@@ -1,28 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-// IMPORT NECESSARY PACKAGES
+// import packages
 package guiPages;
 import systemData.UserDatabase;
 import javax.swing.JOptionPane;
 import java.util.Locale; // for email | converts everything to lowercase in a consistent way
 
-/**
- *
- * @author Admin
- */
 public class SignUpPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUpPage.class.getName());
 
-    /**
-     * Creates new form SignInPage
-     */
     public SignUpPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to center of the screen 
     }
 
     /**
@@ -36,7 +24,6 @@ public class SignUpPage extends javax.swing.JFrame {
 
         backBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
@@ -54,6 +41,7 @@ public class SignUpPage extends javax.swing.JFrame {
         studentIdField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,11 +56,6 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(58, 93, 46));
         jPanel2.setForeground(new java.awt.Color(58, 93, 46));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 51));
-        jLabel1.setText("User Agreement & Privacy Policy.");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, -1));
 
         usernameField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         jPanel2.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 250, -1));
@@ -149,13 +132,19 @@ public class SignUpPage extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu stroke.png")); // NOI18N
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(153, 255, 102));
+        jButton2.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 51, 0));
+        jButton2.setText("User Agreement & Privacy Policy");
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, 210, -1));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // CREATE VARIABLE TO GET THE USERNAME, EMAIL, AND PASSWORD FROM THE TEXTFIELDS
+        // create variable to get username, email, password, confirm password, course, and student id 
         String username = usernameField.getText().trim();
         String email = emailField.getText().trim().toLowerCase(Locale.ROOT);
         String password = new String(passwordField.getPassword());
@@ -163,52 +152,62 @@ public class SignUpPage extends javax.swing.JFrame {
         String course = new String(studentCourse.getSelectedItem().toString());
         String studentIdText = studentIdField.getText().trim();
         
-        // VALIDATIONS
-        // IF USERNAME IS EMPTY OR EMAIL IS EMPTY OR PASSWORD IS EMPTY > ERROR MESSAGE
+        // SignUpPage Validations
+        // if username or email or passwrod or student id is empty > send warning message
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || studentIdText.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "All fields are required!", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-        int studentId = Integer.parseInt(studentIdText);
         
-        // IF USERNAME LENGTH IS LESS THAN 3 > ERROR MESSAGE
+        // if username length is less than 3 or greater than 20 > send warning message
         if (username.length() < 3 || username.length() > 20) {
 
             JOptionPane.showMessageDialog(this, "Username must be 3–20 characters.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        // if some of the username characters is not an alphabet > send warning message
         if(!username.matches("[a-zA-Z]+")){
             JOptionPane.showMessageDialog(this, "Username must contain letters only.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        // IF EMAIL LENGTH IS LESS THAN 3 OR EMAIL IS NOT ENDS WITH "@gmail.com" > ERROR MESSAGE
+        // if email length is less than 3 or greater than 32 > send warning message
         if (email.length() < 3 || email.length() > 32 || !email.endsWith("@cvsu.edu.ph")) {
 
             JOptionPane.showMessageDialog(this, "Invalid format. Email must be @cvsu.edu.ph", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        // if student course is not selected (index 0) > send warning message
         if(studentCourse.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(this, "Please select your course.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        if(studentIdText.length() !=9 || studentIdText.length() > 9){
+        // if student id is not equal to 9 or greater than 9 > send warning message
+        if(studentIdText.length() !=9){
             JOptionPane.showMessageDialog(this, "Please enter a valid student ID.", "Invalid ID format.", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        // IF PASSWORD LENGTH IS LESS THAN 3 > ERROR MESSAGE
-        if (password.length() < 3 || password.length() > 20) {
+        // check if numeric
+        if (!studentIdText.matches("\\d+")) { JOptionPane.showMessageDialog(this, "Student ID must contain only numbers.", "Invalid ID format.", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // convert student id to integer
+        int studentId = Integer.parseInt(studentIdText);
+        
+        // if password length is less than 5 or greater than 20 > send warning message
+        if (password.length() < 5 || password.length() > 20) {
 
             JOptionPane.showMessageDialog(this, "Please use a strong password.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        // IF PASSWORD IS NOT EQUAL TO CONFIRM PASSWORD > ERROR MESSAGE
+        // if password is not equal to confirm password > send warning message
         if(!password.equals(confirm)){
             
             JOptionPane.showMessageDialog(this, "Confirm password did not match.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -216,9 +215,10 @@ public class SignUpPage extends javax.swing.JFrame {
         }
         
         
-        // CHECK IF DUPLICATE: IF USERNAME HAVE THE SAME FROM THE USER DATABASE > ERROR MESSAGE
+        // this will check if there's a duplicate username
         for (UserDatabase.User u : UserDatabase.users) {
-
+            
+            // if username is equal to already existing username > send warning message
             if (u.username.equals(username)) {
 
                 JOptionPane.showMessageDialog(this, "Username already exist.\n Please enter a new name.", "Sign Up Error", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -226,13 +226,13 @@ public class SignUpPage extends javax.swing.JFrame {
             }
         }
         
-        // STORE THE USER username, email, and password INTO THE USER DATABASE
+        // after all validation > store username, email, password, course, and student id to the UserDatabase
         UserDatabase.addUser(username, email, password, course, studentId);
         
-        // IF VALID > SUCCESS MESSAGE
+        // then send a success messsage
         javax.swing.JOptionPane.showMessageDialog(this, "Registered Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         
-        // NAVIGATE TO LOG IN PAGE
+        // navigate to LogInPage
         LogInPage page = new LogInPage();
         page.setVisible(true);
         this.dispose();
@@ -243,7 +243,7 @@ public class SignUpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmPasswordFieldActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        // navigate to HomePage
         HomePage page = new HomePage();
         page.setVisible(true);
         this.dispose();
@@ -279,7 +279,7 @@ public class SignUpPage extends javax.swing.JFrame {
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

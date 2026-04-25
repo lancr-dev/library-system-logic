@@ -1,70 +1,75 @@
-// IMPORT PACKAGES
+// import necessary packages
 package systemData;
-
 import java.util.ArrayList;
 
-// CREATE BOOK DATABASE
+// create BookDatabase
 public class BookDatabase {
-
+    
+    // create removeCopies() method
     public static boolean removeCopies(String code, int quantity) {
         for (Book book : books) {
 
         if (book.code.equalsIgnoreCase(code)) {
 
-            // Check if enough copies exist
+            // check if enough copies exist
             if (quantity <= 0) return false;
-
+            
+            // this will perform to decrease copies of the book
             if (book.copies >= quantity) {
                 book.copies -= quantity;
                 return true;
             } else {
-                return false; // Not enough copies
+                return false; // not enough copies
             }
         }
     }
 
-    return false; // Book not found
+    return false; // book not found
     }
-
+    
+    // create addBook() method
     public static boolean addBook(String title, String author, String code, int copies) {
-        // Basic validation
-        if (title == null || title.isEmpty() ||
-            author == null || author.isEmpty() ||
-            code == null || code.isEmpty() ||
-            copies <= 0) {
+        
+        // if title or title or author or code is equals to null or empty > return false
+        if (title == null || title.isEmpty() || author == null || author.isEmpty() || code == null || code.isEmpty() || copies <= 0) {
             return false;
         }
 
-        // Prevent duplicate book codes
+        // this will prevent duplicate book codes
         for (Book book : books) {
             if (book.code.equalsIgnoreCase(code)) {
                 return false;
             }
         }
 
-        // Add new book
+        // add the new book with details
         books.add(new Book(title, author, code, copies));
         return true;
     }
-
+    
+    // create addCopites() method
     public static boolean addCopies(String code, int quantity) {
+        // loop through books
         for (Book book : books) {
 
             if (book.code.equalsIgnoreCase(code)) {
 
-                if (quantity <= 0) return false;
+                if (quantity <= 0) return false; // if quantity is negative > prevent from adding copies
 
-                book.copies += quantity;
+                book.copies += quantity; // this will add copies if valid
                 return true;
             }
         }
 
-        return false; // Book not found
+        return false; // book not found
     }
-
+    
+    // create a boolean removeBook() method
     public static boolean removeBook(String code) {
+        // if code is equal to null or empty > prevent
         if (code == null || code.trim().isEmpty()) return false;
-
+        
+        // loob through books to find the code of the book before removing
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).code.equalsIgnoreCase(code)) {
                 books.remove(i);
@@ -72,17 +77,18 @@ public class BookDatabase {
             }
         }
 
-        return false; // Book not found
+        return false; // book not found
     }
-
+    
+    // create Book class or model of the book
     public static class Book {
-        // CREATE MODEL / VARIABLES FOR title, author, code, copies
+        // create variables for title, author, code and copies
         public String title;
         public String author;
         public String code;
         public int copies;
         
-        // THIS RUNS WHENEVER A NEW BOOK OBJECT IS CREATED
+        // create a new Book object with given title, author, code, and copies | runs whenever a new Book object is created
         public Book(String t, String a, String c, int n) {
             title = t;
             author = a;
@@ -91,18 +97,17 @@ public class BookDatabase {
         }
     }
     
-    // CREATE ARRAY LIST AS STORAGE/DATABASE
+    // create array list as temporary database for Books
     public static ArrayList<Book> books = new ArrayList<>();
 
-
-    // CREATE LOADBOKS METHOD
+    // create loadBooks() method
     public static void loadBooks() {
         
-        // PREVENTS ADDING THE SAME SET OF BOOKS MULTIPLE TIMES
-        // BECAUSE IF YOU RUN OR USE loadBooks() AGAIN, IT WILL DUPLICATE THE COLLECTION
+        // prevents adding the same set of books multiple times
+        // because if you run or use loadBooks again, it will duplicate the whole book collection
         if (!books.isEmpty()) return; 
         
-        // BOOKS COLLECTION
+        // book collection (already stored in array list)
         books.add(new Book("Java Basics", "Lance", "B1", 10));
         books.add(new Book("DSA", "Miguel", "B2", 10));
         books.add(new Book("Algorithms", "Sevi", "B3", 10));

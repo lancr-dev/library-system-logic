@@ -1,24 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import packages
 package guiPages;
 import systemData.BookDatabase;
 
-/**
- *
- * @author Admin
- */
 public class AddCopiesPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddCopiesPage.class.getName());
 
-    /**
-     * Creates new form AddBookQuantityPage
-     */
     public AddCopiesPage() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
     /**
@@ -31,7 +21,7 @@ public class AddCopiesPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         codeField = new javax.swing.JTextField();
@@ -49,12 +39,12 @@ public class AddCopiesPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(58, 93, 46));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 102));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 0));
-        jButton1.setText("Back");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        backBtn.setBackground(new java.awt.Color(153, 255, 102));
+        backBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(0, 51, 0));
+        backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
+        jPanel1.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,31 +96,28 @@ public class AddCopiesPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // back button > navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
+        // create variable for code and quantity to accept text fields value
         String code = codeField.getText().trim();
         String quantityText = quantityField.getText().trim();
 
-        // Validation
+        // if code or quantity is empty > send warning message
         if (code.isEmpty() || quantityText.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "All fields are required.",
-                "Input Error",
-                javax.swing.JOptionPane.WARNING_MESSAGE
-            );
+            javax.swing.JOptionPane.showMessageDialog(this, "All fields are required.", "Input Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        
+        // create a variable for quantity
         int quantity;
-
+        
+        // convert quantity text to integer then validate of the admin type a positive number
         try {
             quantity = Integer.parseInt(quantityText);
 
@@ -139,39 +126,27 @@ public class AddCopiesPage extends javax.swing.JFrame {
             }
 
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Quantity must be a positive number.",
-                "Input Error",
-                javax.swing.JOptionPane.WARNING_MESSAGE
-            );
+            javax.swing.JOptionPane.showMessageDialog(this, "Quantity must be a positive number.", "Input Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        // Call database method
+        
+        // create a boolean success and call BookDatabase addCopies() method
         boolean success = BookDatabase.addCopies(code, quantity);
-
+        
+        // if not success  or book not found or invalid quantity > send error message
         if (!success) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Book not found or invalid quantity.",
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE
-            );
+            javax.swing.JOptionPane.showMessageDialog(this, "Book code not found or invalid quantity.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        // otherwise > send success message
+        javax.swing.JOptionPane.showMessageDialog(this, "Copies added successfully.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Copies added successfully.",
-            "Success",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE
-        );
-
-        // Clear fields
+        // optional: clear fields after success
         codeField.setText("");
         quantityField.setText("");
         
+        // then navigate to BookManagementPage
         BookManagementPage page = new BookManagementPage();
         page.setVisible(true);
         this.dispose();
@@ -204,8 +179,8 @@ public class AddCopiesPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton backBtn;
     private javax.swing.JTextField codeField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
