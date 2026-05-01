@@ -11,6 +11,11 @@ public class LogInPage extends javax.swing.JFrame {
 
     public LogInPage() {
         initComponents();
+        progressBar.setMinimum(0);
+        progressBar.setMaximum(100);
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        progressBar.setVisible(false);
         setLocationRelativeTo(null); // set the GUI to the center of the screen
     }
 
@@ -37,6 +42,7 @@ public class LogInPage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        progressBar = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,22 +61,22 @@ public class LogInPage extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 210, -1));
 
         usernameField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        jPanel1.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 240, -1));
+        jPanel1.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 240, -1));
 
         jLabel2.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
 
         passwordField.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        jPanel1.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 240, -1));
+        jPanel1.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 240, -1));
 
         loginBtn.setBackground(new java.awt.Color(153, 255, 102));
         loginBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(0, 51, 0));
         loginBtn.setText("LOGIN");
         loginBtn.addActionListener(this::loginBtnActionPerformed);
-        jPanel1.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 240, -1));
+        jPanel1.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 240, -1));
 
         backBtn.setBackground(new java.awt.Color(153, 255, 102));
         backBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -82,7 +88,7 @@ public class LogInPage extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Username");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -99,13 +105,18 @@ public class LogInPage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Welcome to CvSU Library!");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 150, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 150, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\cvsu stroke.png")); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ComProg\\librarySystem\\src\\main\\java\\resources\\books 40px.png")); // NOI18N
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
+
+        progressBar.setBackground(new java.awt.Color(204, 204, 204));
+        progressBar.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        progressBar.setForeground(new java.awt.Color(0, 51, 0));
+        jPanel1.add(progressBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 240, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 500));
 
@@ -125,34 +136,63 @@ public class LogInPage extends javax.swing.JFrame {
             return;
         }
         
-        // create a variable to valid username and password from the UserDatabase
-        boolean valid = UserDatabase.validate(username, password);
-        
-        if (valid) {
+        // Disable login button to prevent multiple clicks
+        loginBtn.setEnabled(false);
 
-            // logged in user
-            SessionData.currentUser = username;
+        // Show progress bar
+        progressBar.setVisible(true);
+        progressBar.setValue(0);
 
-            // store the username action to LogsDatabase addLog() method
-            LogsDatabase.addLog(
-                    username,
-                    "LOGIN",
-                    "-"
-            );
-            
-            // if username and password is valid from the UserDatabase > send success message
-            javax.swing.JOptionPane.showMessageDialog(this, "Log in successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
-            // navigate to HomePage
-            HomePage page = new HomePage();
-            page.setVisible(true);
-            this.dispose();
-            
-        } else {
-            // else if username and password is not valid > send warning message
-            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Authentication Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
+        // Timer for loading effect
+        javax.swing.Timer timer = new javax.swing.Timer(15, null);
 
-        }
+        timer.addActionListener(new java.awt.event.ActionListener() {
+            int progress = 0;
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                progress++;
+                progressBar.setValue(progress);
+
+                if (progress >= 100) {
+                    timer.stop();
+
+                    // create a variable to valid username and password from the UserDatabase
+                    boolean valid = UserDatabase.validate(username, password);
+
+                    if (valid) {
+
+                        // logged in user
+                        SessionData.currentUser = username;
+
+                        // store the username action to LogsDatabase addLog() method
+                        LogsDatabase.addLog(
+                                username,
+                                "LOGIN",
+                                "-"
+                        );
+
+                        // if username and password is valid from the UserDatabase > send success message
+                        javax.swing.JOptionPane.showMessageDialog(null, "Log in successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+                        // navigate to HomePage
+                        HomePage page = new HomePage();
+                        page.setVisible(true);
+                        dispose();
+
+                    } else {
+                        // else if username and password is not valid > send warning message
+                        JOptionPane.showMessageDialog(null, "Invalid username or password.", "Authentication Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    // Reset UI
+                    progressBar.setVisible(false);
+                    loginBtn.setEnabled(true);
+                }
+            }
+        });
+
+        timer.start();
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -207,6 +247,7 @@ public class LogInPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton registerNowBtn;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
