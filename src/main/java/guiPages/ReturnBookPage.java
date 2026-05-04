@@ -197,7 +197,7 @@ public class ReturnBookPage extends javax.swing.JFrame {
                         java.time.LocalDateTime now = java.time.LocalDateTime.now(); // get the current data and time
 
                         long hoursBetween = java.time.Duration.between(record.borrowDate, now).toMinutes(); // this should be toHours (just for testing and debugging)
-                        boolean isLate = hoursBetween > 1; // hours difference
+                        boolean isLate = hoursBetween > 3; // hours difference
 
                         // log with penalty to the LogsDatabase using addLog() method
                         LogsDatabase.addLog(SessionData.currentUser, "RETURN", b.title, isLate);
