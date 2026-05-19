@@ -90,7 +90,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(0, 51, 0));
         jButton1.setText("REGISTER NOW!");
         jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 250, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 250, -1));
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 30)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +110,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 51));
         jLabel8.setText("By clicking register now, you agree to CvSU's ");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, -1, -1));
 
         studentCourse.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         studentCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "BSCS", "BSIT", "BSBA", "BSHM", "BENT", "BAJOURN", "BSPSYCH", "BSOA", "BSED" }));
@@ -133,10 +133,11 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(153, 255, 102));
-        jButton2.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 51, 0));
         jButton2.setText("User Agreement & Privacy Policy");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, 210, -1));
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 540, 230, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
@@ -248,6 +249,11 @@ public class SignUpPage extends javax.swing.JFrame {
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        UserAgreementPrivacyPolicyPage page = new UserAgreementPrivacyPolicyPage();
+        page.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
