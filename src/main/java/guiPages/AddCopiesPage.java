@@ -126,7 +126,7 @@ public class AddCopiesPage extends javax.swing.JFrame {
             }
 
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Quantity must be a positive number.", "Input Error", javax.swing.JOptionPane.WARNING_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Quantity must greater than 0.", "Input Error", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
         
