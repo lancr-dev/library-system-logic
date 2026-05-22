@@ -108,16 +108,59 @@ public class BookDatabase {
         if (!books.isEmpty()) return; 
         
         // book collection (already stored in array list)
-        books.add(new Book("Java Basics", "Lance", "B1", 10));
-        books.add(new Book("DSA", "Miguel", "B2", 10));
-        books.add(new Book("Algorithms", "Sevi", "B3", 10));
-        books.add(new Book("Database", "Rhowanne", "B4", 10));
-        books.add(new Book("Networking", "Charles", "B5", 10));
-        books.add(new Book("Operating System", "Aldrin", "B6", 10));
-        books.add(new Book("AI Intro", "Jayson", "B7", 10));
-        books.add(new Book("Web Dev", "Paul", "B8", 10));
-        books.add(new Book("Security", "Mark", "B9", 10));
-        books.add(new Book("Software Eng", "John", "B10", 10));
+        books.add(new Book("Introduction to Programming", "Paul Deitel", "CS101", 20));
+        books.add(new Book("Object-Oriented Programming in Java", "Cay S. Horstmann", "CS102", 20));
+        books.add(new Book("Data Structures Fundamentals", "Michael Goodrich", "CS103", 20));
+        books.add(new Book("Algorithms Unlocked", "Thomas H. Cormen", "CS104", 20));
+        books.add(new Book("Computer Organization and Design", "David A. Patterson", "CS105", 20));
+
+        books.add(new Book("Operating System Concepts", "Abraham Silberschatz", "CS106", 20));
+        books.add(new Book("Database System Design", "Raghu Ramakrishnan", "CS107", 20));
+        books.add(new Book("Computer Networks", "Andrew S. Tanenbaum", "CS108", 20));
+        books.add(new Book("Software Engineering Principles", "Ian Sommerville", "CS109", 20));
+        books.add(new Book("Artificial Intelligence Basics", "Stuart Russell", "CS110", 20));
+
+        books.add(new Book("Web Development Essentials", "Jon Duckett", "IT101", 20));
+        books.add(new Book("Mobile App Development", "Meier Jeffrey", "IT102", 20));
+        books.add(new Book("System Analysis and Design", "Kendall & Kendall", "IT103", 20));
+        books.add(new Book("Human Computer Interaction", "Alan Dix", "IT104", 20));
+        books.add(new Book("Cybersecurity Fundamentals", "William Stallings", "IT105", 20));
+
+        books.add(new Book("Discrete Mathematics", "Kenneth Rosen", "MATH101", 20));
+        books.add(new Book("Calculus I", "James Stewart", "MATH102", 20));
+        books.add(new Book("Calculus II", "James Stewart", "MATH103", 20));
+        books.add(new Book("Linear Algebra", "Gilbert Strang", "MATH104", 20));
+        books.add(new Book("Probability and Statistics", "Ronald Walpole", "MATH105", 20));
+
+        books.add(new Book("General Physics I", "Serway & Jewett", "SCI101", 20));
+        books.add(new Book("General Physics II", "Hugh Young", "SCI102", 20));
+        books.add(new Book("Modern Physics", "Kenneth Krane", "SCI103", 20));
+        books.add(new Book("Basic Chemistry", "Zumdahl", "SCI104", 20));
+        books.add(new Book("Organic Chemistry", "Paula Bruice", "SCI105", 20));
+
+        books.add(new Book("Principles of Economics", "N. Gregory Mankiw", "BUS101", 20));
+        books.add(new Book("Microeconomics", "Paul Krugman", "BUS102", 20));
+        books.add(new Book("Macroeconomics", "Olivier Blanchard", "BUS103", 20));
+        books.add(new Book("Accounting Principles", "Jerry Weygandt", "BUS104", 20));
+        books.add(new Book("Business Management", "Stephen Robbins", "BUS105", 20));
+
+        books.add(new Book("Technical Writing", "Sharon Gerson", "ENG101", 20));
+        books.add(new Book("Engineering Mechanics", "Beer & Johnston", "ENG102", 20));
+        books.add(new Book("Engineering Drawing", "N. D. Bhatt", "ENG103", 20));
+        books.add(new Book("Thermodynamics", "Yunus Çengel", "ENG104", 20));
+        books.add(new Book("Electrical Circuits", "Alexander & Sadiku", "ENG105", 20));
+
+        books.add(new Book("Psychology Fundamentals", "David Myers", "PSY101", 20));
+        books.add(new Book("Cognitive Psychology", "E. Bruce Goldstein", "PSY102", 20));
+        books.add(new Book("Abnormal Psychology", "Ronald Comer", "PSY103", 20));
+        books.add(new Book("Social Psychology", "Aronson Wilson", "PSY104", 20));
+        books.add(new Book("Developmental Psychology", "John Santrock", "PSY105", 20));
+
+        books.add(new Book("Philippine History", "Teodoro Agoncillo", "HUM101", 20));
+        books.add(new Book("World History", "William McNeill", "HUM102", 20));
+        books.add(new Book("Ethics and Morality", "Immanuel Kant (compiled)", "HUM103", 20));
+        books.add(new Book("Logic and Critical Thinking", "Irving Copi", "HUM104", 20));
+        books.add(new Book("Communication Arts", "Julia Wood", "HUM105", 20));
 
     }
 
